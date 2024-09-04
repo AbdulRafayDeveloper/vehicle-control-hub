@@ -1,0 +1,41 @@
+/* VehicleListing.css */
+
+.vehicle-listing-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.vehicle-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.vehicle-table th, .vehicle-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.vehicle-table th {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+.vehicle-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.vehicle-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.vehicle-table th, .vehicle-table td {
+  padding: 12px 15px;
+}
+
+.vehicle-table th {
+  background-color: #4CAF50;
+  color: white;
+}

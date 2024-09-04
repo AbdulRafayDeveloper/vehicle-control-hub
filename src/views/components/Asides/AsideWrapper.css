@@ -1,0 +1,9 @@
+.expanded {
+  width: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+.collapsed {
+  width: 15.45rem;
+  transition: width 0.3s ease-in-out;
+}
