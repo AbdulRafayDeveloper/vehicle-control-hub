@@ -14,6 +14,7 @@ import Dashboard from "../../views/pages/User/Dashboard.jsx";
 import WatchList from "../../views/pages/User/WatchList.jsx";
 import Favorites from "../../views/pages/User/Favourites.jsx";
 import Bids from "../../views/pages/User/Bids.jsx";
+import PersonalInfoForm from "../../views/pages/User/PersonalProfile/PersonalProfile.jsx";
 
 const ResetPassword = lazy(() => import("../../views/pages/Auth/RestPassword"));
 const RegisterForm = lazy(() => import("../../views/pages/Auth/Register.jsx"));
@@ -95,6 +96,12 @@ export const routes = [
   {
     path: "/user/bids",
     page: <Bids />,
+    isProtected: true,
+    aside: null,
+  },
+  {
+    path: "/user/profile",
+    page: <PersonalInfoForm />,
     isProtected: true,
     aside: null,
   },

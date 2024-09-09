@@ -6,6 +6,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
+  Link,
   ListItemText,
   Paper,
   InputBase,
@@ -15,7 +16,7 @@ import {
   useTheme,
 } from "@mui/material";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
-import PersonIcon from "@mui/icons-material/Person";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import GavelIcon from "@mui/icons-material/Gavel";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -29,10 +30,10 @@ const SideBar = () => {
   return (
     <Box
       sx={{
-        width: { xs: "100%", sm: 250 },
+        width: { xs: "100%", sm: 300 },
         bgcolor: "white",
         borderRadius: "10px",
-        boxShadow: 3,
+        boxShadow: 4,
         p: 2,
         display: "flex",
         flexDirection: "column",
@@ -45,79 +46,105 @@ const SideBar = () => {
         src="https://i.pravatar.cc/150?img=12"
         sx={{ width: 70, height: 70, mb: 1 }}
       />
-      <Typography variant="h6">Percy Reed</Typography>
-      <Typography variant="body2" color="textSecondary">
+      <Typography variant="body1" fontWeight={"bold"}>
+        Percy Reed
+      </Typography>
+      <Typography variant="subtitle2" color="textSecondary">
         john@gmail.com
       </Typography>
 
-      <List sx={{ width: "100%", mt: 1 }}>
+      <List sx={{ width: "90%", mt: 1 }}>
         <ListItem>
-          <ListItemIcon>
-            <DashboardOutlinedIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Dashboard"
-            primaryTypographyProps={{ fontSize: "0.875rem" }}
-          />
+          <div className="flex gap-2">
+            <DashboardOutlinedIcon
+              color="primary"
+              fontSize="small"
+              className="mt-1"
+            />
+            <ListItemText
+              primary="Dashboard"
+              primaryTypographyProps={{ fontSize: "0.8rem" }}
+            />
+          </div>
         </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <PersonIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Personal Profile"
-            primaryTypographyProps={{ fontSize: "0.875rem" }}
-          />
-        </ListItem>
-
-        <ListItem>
-          <ListItemIcon>
-            <GavelIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary="My Bids"
-            primaryTypographyProps={{ fontSize: "0.875rem" }}
-          />
+        <ListItem className="-mt-3">
+          <div className="flex gap-2">
+            <PersonOutlinedIcon
+              color="primary"
+              fontSize="small"
+              className="mt-1"
+            />
+            <ListItemText
+              primary="Personal Profile"
+              primaryTypographyProps={{ fontSize: "0.8rem" }}
+            />
+          </div>
         </ListItem>
 
-        <ListItem>
-          <ListItemIcon>
-            <EmojiEventsOutlinedIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Winning Bids"
-            primaryTypographyProps={{ fontSize: "0.875rem" }}
-          />
+        <ListItem className="-mt-3">
+          <div className="flex gap-2">
+            <GavelIcon color="primary" fontSize="small" className="mt-1" />
+            <ListItemText
+              primary="My Bids"
+              primaryTypographyProps={{ fontSize: "0.8rem" }}
+            />
+          </div>
         </ListItem>
 
-        <ListItem sx={{ bgcolor: "rgba(0, 0, 255, 0.1)", borderRadius: 2 }}>
-          <ListItemIcon>
-            <NotificationsNoneOutlinedIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary="My Notification"
-            primaryTypographyProps={{ fontSize: "0.875rem" }}
-          />
+        <ListItem className="-mt-3">
+          <div className="flex gap-2">
+            <EmojiEventsOutlinedIcon
+              color="primary"
+              fontSize="small"
+              className="mt-1"
+            />
+            <ListItemText
+              primary="Winning Bids"
+              primaryTypographyProps={{ fontSize: "0.8rem" }}
+            />
+          </div>
         </ListItem>
 
-        <ListItem>
-          <ListItemIcon>
-            <StarBorderOutlinedIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary="My Favorite"
-            primaryTypographyProps={{ fontSize: "0.875rem" }}
-          />
+        <ListItem className="-mt-3">
+          <div className="flex gap-2">
+            <NotificationsNoneOutlinedIcon
+              color="primary"
+              fontSize="small"
+              className="mt-1"
+            />
+            <ListItemText
+              primary="My Notification"
+              primaryTypographyProps={{ fontSize: "0.8rem" }}
+            />
+          </div>
         </ListItem>
 
-        <ListItem>
-          <ListItemIcon>
-            <FavoriteBorderOutlinedIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary="My WatchList"
-            primaryTypographyProps={{ fontSize: "0.875rem" }}
-          />
+        <ListItem className="-mt-3">
+          <div className="flex gap-2">
+            <StarBorderOutlinedIcon
+              color="primary"
+              fontSize="small"
+              className="mt-1"
+            />
+            <ListItemText
+              primary="My Favorite"
+              primaryTypographyProps={{ fontSize: "0.8rem" }}
+            />
+          </div>
+        </ListItem>
+
+        <ListItem className="-mt-3">
+          <div className="flex gap-2">
+            <FavoriteBorderOutlinedIcon
+              color="primary"
+              fontSize="small"
+              className="mt-1"
+            />
+            <ListItemText
+              primary="My WatchList"
+              primaryTypographyProps={{ fontSize: "0.8rem" }}
+            />
+          </div>
         </ListItem>
       </List>
     </Box>
@@ -126,90 +153,89 @@ const SideBar = () => {
 
 const SearchBar = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        bgcolor: "white",
-        borderRadius: 3,
-        boxShadow: 3,
-        marginY: "1rem",
-        width: { xs: "100%", sm: "300px" },
-      }}
-    >
+    <Box display={"flex"} marginTop={"1.5rem"}>
       <Paper
         component="form"
         sx={{
           display: "flex",
           alignItems: "center",
-          width: "100%",
-          borderRadius: 20,
-          boxShadow: "none",
-          p: "1px 2px",
+          width: "80%",
+          borderRadius: 1,
+          boxShadow: 2,
           mr: 2,
         }}
       >
         <InputBase
-          sx={{ ml: 1, flex: 1 }}
+          sx={{ ml: 1, flex: 1, fontSize: "0.8rem" }}
           placeholder="Search..."
           inputProps={{ "aria-label": "search" }}
         />
-        <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-          <SearchIcon />
+        <IconButton type="submit" sx={{ p: "6px" }} aria-label="search">
+          <SearchIcon fontSize="small" />
         </IconButton>
       </Paper>
       <IconButton
         size="small"
         sx={{
-          bgcolor: "primary.main",
+          bgcolor: "#000080",
           color: "white",
           borderRadius: 1,
           mr: 1,
-          "&:hover": {
-            bgcolor: "primary.dark",
-          },
         }}
         aria-label="apps"
       >
-        <GridViewOutlinedIcon />
+        <GridViewOutlinedIcon fontSize="small" />
       </IconButton>
       <IconButton
         size="small"
         sx={{
           bgcolor: "white",
           color: "black",
-          borderRadius: 2,
-          mr: 1,
-          boxShadow: 1,
+          borderRadius: 1,
+          boxShadow: 2,
           "&:hover": {
             bgcolor: "grey.200",
           },
         }}
         aria-label="apps"
       >
-        <MenuIcon />
+        <MenuIcon fontSize="small" />
       </IconButton>
     </Box>
   );
 };
 
-const UserProfileCard = ({ children }) => {
+const UserProfileCard = ({ children, tips }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <div className="p-3">
-      <Grid container justifyContent={isSmallScreen ? "center" : "flex-end"}>
+      <Grid
+        container
+        justifyContent={"flex-end"}
+        width={isSmallScreen ? "100%" : "87%"}
+      >
         <SearchBar />
       </Grid>
-      <Grid container gap={6}>
-        <Grid item xs={12} sm={2} marginLeft={isSmallScreen ? "10px" : "70px"}>
+      <Grid container gap={1}>
+        <Grid item xs={12} sm={3} marginLeft={isSmallScreen ? "10px" : "120px"}>
           <SideBar />
         </Grid>
-        <Grid item xs={12} sm={7}>
+        <Grid item xs={12} sm={6}>
           <Box marginY={"1rem"}>{children}</Box>
         </Grid>
       </Grid>
+      <Box
+        sx={{
+          marginY: "1rem",
+          display: isSmallScreen ? "flex" : "",
+          justifyItems: isSmallScreen ? "center" : "left",
+          marginLeft: isSmallScreen ? "40px" : "0px",
+        }}
+      >
+        {tips}
+      </Box>
     </div>
   );
 };

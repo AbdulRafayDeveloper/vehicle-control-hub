@@ -43,151 +43,156 @@ const CarCard = () => {
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        maxWidth: 260,
         borderRadius: 2,
         padding: 1,
         boxShadow: 2,
-        marginX: 2,
+        marginX: 1,
         position: "relative",
       }}
     >
       <CardMedia
         component="img"
-        height="140"
-        image={carData.imageUrl}
+        image="/src/assets/car.png"
         alt={carData.title}
+        sx={{ borderRadius: 2 }}
       />
-      <IconButton
+      <CardMedia
+        component="img"
+        image="/src/assets/favourite.png"
+        alt={carData.title}
         sx={{
           position: "absolute",
-          top: "10px",
-          left: "10px",
-          backgroundColor: "white",
-          boxShadow: 2,
-          color: "skyblue",
+          top: "15px",
+          right: "10px",
+          width: 35,
+          height: 35,
         }}
-      >
-        <FavoriteBorderIcon fontSize="small" />
-      </IconButton>
-      <IconButton
+      />
+
+      {/* <IconButton
         sx={{
           position: "absolute",
-          top: "10px",
+          top: "15px",
           right: "10px",
           backgroundColor: "white",
           boxShadow: 2,
           color: "orange",
+          width: 0,
+          height: 30,
         }}
       >
         <StarBorderOutlinedIcon fontSize="small" />
-      </IconButton>
+      </IconButton> */}
 
       <CardContent>
-        <Grid container spacing={2} alignItems="left">
-          <Grid item xs={3} textAlign={"left"} gap={2}>
-            <Typography
-              variant="body2"
-              color="white"
-              bgcolor={"green"}
-              padding={"2px"}
-              borderRadius={2}
-              display={"flex"}
-              gap={1}
-            >
-              <OfflineBoltOutlinedIcon fontSize="small" />
-              Live
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container justifyContent={"space-between"} marginY={1}>
-          <Typography variant="body1" component="div" fontWeight={"bold"}>
+        <Grid container justifyContent={"space-between"}>
+          <Typography variant="body2" component="div">
             {carData.title}
           </Typography>
-          <Typography variant="body2" color="primary">
+          <Typography color="primary" fontSize={"0.7rem"}>
             {carData.year}
           </Typography>
         </Grid>
-        <Grid container justifyContent={"space-between"} marginY={1}>
-          <Typography variant="body1" component="div" fontWeight={"bold"}>
+        <Grid container justifyContent={"space-between"}>
+          <Typography variant="body2" component="div">
             {carData.engine}
           </Typography>
-          <Typography variant="body2" color="primary">
+          <Typography color="primary" fontSize={"0.7rem"}>
             {carData.mileage}
           </Typography>
         </Grid>
-        <Grid container justifyContent={"space-between"} marginY={1}>
-          <Typography
-            variant="body1"
-            component="div"
-            fontWeight={"bold"}
-            display={"flex"}
-            gap={1}
-          >
+        <Grid container justifyContent={"space-between"}>
+          <Typography variant="body2" component="div" display={"flex"}>
             {carData.grade}
-            <Typography color={"primary"}>(4)</Typography>
+            <Typography color={"primary"} fontSize={"0.7rem"}>
+              (4)
+            </Typography>
           </Typography>
           <Typography
-            variant="body1"
+            fontSize={"0.7rem"}
             display={"flex"}
             gap={1}
             fontWeight={"bold"}
           >
-            Lot #<Typography color={"primary"}>{carData.lotNumber}</Typography>
+            Lot #
+            <Typography color={"primary"} fontSize={"0.7rem"}>
+              {carData.lotNumber}
+            </Typography>
           </Typography>
         </Grid>
-        <hr className="mt-1" />
-        <Grid container spacing={2} alignItems="center" padding={1}>
+        <hr />
+        <Grid container alignItems="center" padding={0.3}>
           <Grid item xs={6}>
-            <Grid container spacing={1} alignItems="center">
+            <Grid container>
               <Grid item>
-                <GavelIcon color="success" fontSize="large" />
+                <img src="/src/assets/bid.png" alt="" width={25} height={25} />
               </Grid>
               <Grid item>
-                <Typography variant="body2" color={"green"}>
+                <Typography color={"green"} fontSize={"0.7rem"} marginLeft={1}>
                   Current Bid
                 </Typography>
-                <Typography>$ {carData.currentBid}</Typography>
+                <Typography fontSize={"0.7rem"} marginTop={-1}>
+                  $ {carData.currentBid}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={6}>
-            <Grid container spacing={1} alignItems="center">
+            <Grid container>
               <Grid item>
-                <LocalMallOutlinedIcon color="error" fontSize="large" />
+                <img src="/src/assets/buy.png" alt="" width={25} height={25} />
               </Grid>
               <Grid item>
-                <Typography variant="body2" color={"red"}>
+                <Typography color={"error"} fontSize={"0.7rem"}>
                   Buy Now
                 </Typography>
-                <Typography>$ {carData.buyNow}</Typography>
+                <Typography fontSize={"0.7rem"} marginTop={-1} marginLeft={1}>
+                  $ {carData.buyNow}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <hr className="my-2" />
-        <Grid container spacing={3} alignItems="center" marginY={1}>
-          <Grid item xs={6} align="right">
-            <Grid container spacing={1} alignItems="center">
+        <hr />
+        <Grid container justifyContent={"space-between"}>
+          <Grid item>
+            <Grid container alignItems="center" gap={0.4}>
               <Grid item>
-                <AccessTimeIcon color="primary" />
+                <AccessTimeIcon color="primary" fontSize="small" />
               </Grid>
               <Grid item>
-                <Typography variant="body2">0d: 3h: 8m: 8s</Typography>
+                <Typography fontSize={"0.7rem"} marginTop={1}>
+                  0d: 3h: 8m: 8s
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Grid container spacing={1} alignItems="center">
+          <Grid item>
+            <Grid container alignItems="center" gap={0.4}>
               <Grid item>
-                <LocalOfferIcon color="secondary" />
+                <LocalOfferIcon color="secondary" fontSize="small" />
               </Grid>
               <Grid item>
-                <Typography variant="body2">{carData.bids} Bids</Typography>
+                <Typography fontSize={"0.7rem"} marginTop={1}>
+                  {carData.bids} Bids
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <SubmitBidButton variant="contained">Submit A Bid</SubmitBidButton>
+        <SubmitBidButton
+          variant="contained"
+          sx={{
+            marginTop: "1rem",
+            marginBottom: "-1rem",
+            borderRadius: 6,
+            textTransform: "capitalize",
+            fontSize: "0.8rem",
+          }}
+        >
+          Submit A Bid
+        </SubmitBidButton>
       </CardContent>
     </Card>
   );
@@ -198,7 +203,7 @@ const WatchList = () => {
     <div>
       <Header title={"My Watchlist"} navText={"User / My Watchlist"} />
       <UserProfileCard>
-        <Grid container justifyContent="center">
+        <Grid container>
           <CarCard />
           <CarCard />
         </Grid>

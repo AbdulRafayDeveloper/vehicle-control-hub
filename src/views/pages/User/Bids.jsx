@@ -12,11 +12,71 @@ import {
   Box,
   Stack,
   useMediaQuery,
+  Typography,
 } from "@mui/material";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import Header from "../../components/Header/Header";
 import UserProfileCard from "../../components/SideBar/SideBar";
+import { List, ListItem, ListItemIcon, Link } from "@mui/material";
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+
+const SafetyTips = () => {
+  return (
+    <Box
+      sx={{
+        border: "1px solid #e0e0e0",
+        borderRadius: "8px",
+        padding: "16px",
+        boxShadow: 4,
+        width: "300px",
+        backgroundColor: "#fff",
+        marginLeft: "120px",
+      }}
+    >
+      <Typography variant="body1" fontWeight={"bold"}>
+        Safety Tips For Buyers
+      </Typography>
+      <List>
+        <ListItem>
+          <ListItemIcon>
+            <DoneOutlinedIcon sx={{ color: "green" }} fontSize="small" />
+          </ListItemIcon>
+          <Typography sx={{ fontSize: "0.7rem", marginLeft: "-25px" }}>
+            Meet Seller at public Place
+          </Typography>
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <DoneOutlinedIcon sx={{ color: "green" }} fontSize="small" />
+          </ListItemIcon>
+          <Typography sx={{ fontSize: "0.7rem", marginLeft: "-25px" }}>
+            Check item before you buy
+          </Typography>
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <DoneOutlinedIcon sx={{ color: "green" }} fontSize="small" />
+          </ListItemIcon>
+          <Typography sx={{ fontSize: "0.7rem", marginLeft: "-25px" }}>
+            Pay only after collecting item
+          </Typography>
+        </ListItem>
+      </List>
+      <Link
+        href="#"
+        sx={{
+          display: "block",
+          fontSize: "0.7rem",
+          textAlign: "left",
+          marginLeft: "45px",
+        }}
+      >
+        View more...
+      </Link>
+    </Box>
+  );
+};
 
 const adsData = [
   {
@@ -65,11 +125,11 @@ export default function Bids() {
   return (
     <div>
       <Header title={"My Bids"} navText={"User / My Bids"} />
-      <UserProfileCard>
+      <UserProfileCard tips={<SafetyTips />}>
         <Box textAlign={"left"}>
           <Stack
             direction={isMobile ? "column" : "row"}
-            spacing={isMobile ? 1 : 2}
+            spacing={2}
             sx={{ mb: 2 }}
           >
             {filters.map((filter, index) => (
@@ -77,18 +137,21 @@ export default function Bids() {
                 key={index}
                 onClick={() => handleFilterClick(index)}
                 variant="contained"
+                size="small"
                 sx={{
                   backgroundColor:
                     index === activeFilter ? "primary.main" : "white",
                   color: index === activeFilter ? "white" : "black",
                   border: "1px solid #ccc",
+                  borderRadius: 0,
+                  boxShadow: 0,
                   "&:hover": {
                     backgroundColor:
                       index === activeFilter ? "primary.dark" : "#f0f0f0",
                   },
-                  fontSize: isMobile ? "12px" : "14px",
-                  padding: isMobile ? "5px 10px" : "8px 16px",
+                  fontSize: isMobile ? "12px" : "12px",
                   textTransform: "capitalize",
+                  textAlign: "left",
                 }}
               >
                 {filter}
@@ -97,45 +160,85 @@ export default function Bids() {
           </Stack>
 
           {/* Table */}
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} sx={{ borderRadius: 2 }}>
             <Table aria-label="ads table">
               <TableHead>
-                <TableRow>
-                  <TableCell align="left">Default</TableCell>
-                  <TableCell align="left">Item</TableCell>
-                  <TableCell align="left">Category</TableCell>
-                  <TableCell align="left">Price</TableCell>
-                  <TableCell align="left">Status</TableCell>
-                  <TableCell align="left">Action</TableCell>
+                <TableRow sx={{ padding: 0 }}>
+                  <TableCell
+                    align="left"
+                    sx={{
+                      fontSize: "0.8rem",
+                      fontWeight: "bold",
+                      paddingY: 0,
+                    }}
+                  >
+                    Default
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ fontSize: "0.8rem", fontWeight: "bold" }}
+                  >
+                    Item
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ fontSize: "0.8rem", fontWeight: "bold" }}
+                  >
+                    Category
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ fontSize: "0.8rem", fontWeight: "bold" }}
+                  >
+                    Price
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ fontSize: "0.8rem", fontWeight: "bold" }}
+                  >
+                    Status
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ fontSize: "0.8rem", fontWeight: "bold" }}
+                  >
+                    Action
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {adsData.map((ad) => (
                   <TableRow key={ad.id}>
                     <TableCell>
-                      <Checkbox />
+                      <Checkbox size="small" />
                     </TableCell>
                     <TableCell>
                       <Box display="flex" alignItems="center">
                         <img
-                          src="https://via.placeholder.com/40"
+                          src="/src/assets/bids-img.png"
                           alt="ad-img"
                           style={{ marginRight: 10 }}
                         />
-                        <div>
+                        <div className="text-[0.7rem]">
                           {ad.item} <br />
-                          <small>{ad.date}</small>
+                          <small>{ad.date}</small> <br />
+                          <small>sale</small>
                         </div>
                       </Box>
                     </TableCell>
-                    <TableCell>{ad.category}</TableCell>
-                    <TableCell>${ad.price}</TableCell>
+                    <TableCell sx={{ fontSize: "0.7rem" }}>
+                      {ad.category}
+                    </TableCell>
+                    <TableCell sx={{ fontSize: "0.7rem" }}>
+                      ${ad.price}
+                    </TableCell>
                     <TableCell>
                       {ad.status === "Published" ? (
                         <Button
                           variant="contained"
                           color="warning"
                           size="small"
+                          sx={{ textTransform: "capitalize", paddingY: 0 }}
                         >
                           Published
                         </Button>
@@ -144,23 +247,17 @@ export default function Bids() {
                           variant="contained"
                           color="primary"
                           size="small"
+                          sx={{ textTransform: "capitalize", paddingY: 0 }}
                         >
                           Sold
                         </Button>
                       )}
                     </TableCell>
                     <TableCell>
-                      <Button
-                        variant="contained"
-                        color="success"
-                        size="small"
-                        sx={{ mr: 1, marginBottom: isMobile ? 2 : 0 }}
-                      >
-                        <CreateOutlinedIcon />
-                      </Button>
-                      <Button variant="contained" color="error" size="small">
-                        <DeleteOutlinedIcon />
-                      </Button>
+                      <Box sx={{ display: "flex", gap: 1 }}>
+                        <CreateOutlinedIcon className="bg-green-600 text-white rounded p-1" />
+                        <DeleteOutlinedIcon className="bg-red-600 text-white rounded p-1" />
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))}

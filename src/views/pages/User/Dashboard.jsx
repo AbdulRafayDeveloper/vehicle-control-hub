@@ -30,8 +30,8 @@ const Cards = () => {
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Box sx={{ boxShadow: 3, padding: 4, borderRadius: 2 }}>
-      <Typography variant="h6" textAlign={"left"} gutterBottom>
+    <Box sx={{ boxShadow: 3, padding: 2, paddingLeft: 3, borderRadius: 2 }}>
+      <Typography variant="body1" textAlign={"left"} gutterBottom>
         My Activity
       </Typography>
       <hr className="bg-blue-400 mb-4 " />
@@ -48,19 +48,33 @@ const Cards = () => {
         <Card
           sx={{
             borderRadius: 2,
-            width: isSmallScreen ? "100%" : isMediumScreen ? "50%" : "25%",
+            width: isSmallScreen ? "100%" : isMediumScreen ? "50%" : "33%",
           }}
         >
           <CardActionArea>
-            <CardMedia sx={{ padding: "10px" }}>
+            <CardMedia sx={{ paddingTop: "5px" }}>
               <MonetizationOnOutlinedIcon color="primary" fontSize="large" />
             </CardMedia>
-            <CardContent>
-              <Typography gutterBottom variant="h3" component="div">
+            <CardContent className="-mt-2">
+              <Typography
+                gutterBottom
+                variant="h4"
+                color={"#404040"}
+                component="div"
+              >
                 80
               </Typography>
-              <Typography variant="h5" sx={{ color: "text.secondary" }}>
-                Active Bids
+              <Typography
+                variant="body1"
+                sx={{ color: "text.secondary", marginTop: -3 }}
+              >
+                Active
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ color: "text.secondary", marginTop: -1 }}
+              >
+                Bids
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -70,19 +84,33 @@ const Cards = () => {
         <Card
           sx={{
             borderRadius: 2,
-            width: isSmallScreen ? "100%" : isMediumScreen ? "50%" : "25%",
+            width: isSmallScreen ? "100%" : isMediumScreen ? "50%" : "33%",
           }}
         >
           <CardActionArea>
-            <CardMedia sx={{ padding: "10px" }}>
+            <CardMedia sx={{ paddingTop: "5px" }}>
               <EmojiEventsOutlinedIcon color="primary" fontSize="large" />
             </CardMedia>
-            <CardContent>
-              <Typography gutterBottom variant="h3" component="div">
+            <CardContent className="-mt-2">
+              <Typography
+                gutterBottom
+                variant="h4"
+                color={"#404040"}
+                component="div"
+              >
                 15
               </Typography>
-              <Typography variant="h5" sx={{ color: "text.secondary" }}>
-                Items Won
+              <Typography
+                variant="body1"
+                sx={{ color: "text.secondary", marginTop: -3 }}
+              >
+                Items
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ color: "text.secondary", marginTop: -1 }}
+              >
+                Won
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -92,19 +120,33 @@ const Cards = () => {
         <Card
           sx={{
             borderRadius: 2,
-            width: isSmallScreen ? "100%" : isMediumScreen ? "50%" : "25%",
+            width: isSmallScreen ? "100%" : isMediumScreen ? "50%" : "33%",
           }}
         >
           <CardActionArea>
-            <CardMedia sx={{ padding: "10px" }}>
+            <CardMedia sx={{ paddingTop: "5px" }}>
               <AutoAwesomeOutlinedIcon color="primary" fontSize="large" />
             </CardMedia>
-            <CardContent>
-              <Typography gutterBottom variant="h3" component="div">
+            <CardContent className="-mt-2">
+              <Typography
+                gutterBottom
+                variant="h4"
+                color={"#404040"}
+                component="div"
+              >
                 115
               </Typography>
-              <Typography variant="h5" sx={{ color: "text.secondary" }}>
-                Favourites
+              <Typography
+                variant="body1"
+                sx={{ color: "text.secondary", marginTop: -3 }}
+              >
+                Favorites
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ color: "text.secondary", marginTop: -1 }}
+              >
+                &nbsp;
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -114,12 +156,6 @@ const Cards = () => {
   );
 };
 function PurchasingTable() {
-  const [tabValue, setTabValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setTabValue(newValue);
-  };
-
   const data = [
     {
       item: "2018 Hyundai Sonata",
@@ -162,77 +198,83 @@ function PurchasingTable() {
     <Box
       sx={{
         boxShadow: 3,
-        padding: 4,
+        padding: 2,
+        paddingLeft: 3,
         borderRadius: 2,
         marginTop: "1rem",
         textAlign: "left",
       }}
     >
-      <Typography variant="h5" sx={{ marginBottom: 2 }}>
+      <Typography variant="body1" fontWeight={"bold"}>
         Purchasing
       </Typography>
-      <Tabs value={tabValue} onChange={handleChange}>
-        <Tab label="Current" />
-        <Tab label="Pending" />
-        <Tab label="History" />
+      <Tabs className="-ml-4">
+        <Tab
+          label="Current"
+          sx={{
+            textTransform: "capitalize",
+            fontWeight: "bold",
+            fontSize: "0.9rem",
+          }}
+        />
+        <Tab
+          label="Pending"
+          sx={{
+            textTransform: "capitalize",
+            fontWeight: "bold",
+            fontSize: "0.9rem",
+          }}
+        />
+        <Tab
+          label="History"
+          sx={{
+            textTransform: "capitalize",
+            fontWeight: "bold",
+            fontSize: "0.9rem",
+          }}
+        />
       </Tabs>
+      <hr className="-mt-3" />
+      <div className="bg-blue-500 h-0.5 w-16"></div>
 
-      <TabPanel value={tabValue} index={0}>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Item</TableCell>
-                <TableCell>Bid Price</TableCell>
-                <TableCell>Highest Bid</TableCell>
-                <TableCell>Lowest Bid</TableCell>
-                <TableCell>Expires</TableCell>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontSize: "0.8rem" }}>Item</TableCell>
+              <TableCell sx={{ fontSize: "0.8rem" }}>Bid Price</TableCell>
+              <TableCell sx={{ fontSize: "0.8rem" }}>Highest Bid</TableCell>
+              <TableCell sx={{ fontSize: "0.8rem" }}>Lowest Bid</TableCell>
+              <TableCell sx={{ fontSize: "0.8rem" }}>Expires</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row, index) => (
+              <TableRow key={index}>
+                <TableCell sx={{ fontSize: "0.8rem" }}>{row.item}</TableCell>
+                <TableCell sx={{ fontSize: "0.8rem" }}>
+                  {row.bidPrice}
+                </TableCell>
+                <TableCell sx={{ fontSize: "0.8rem" }}>
+                  {row.highestBid}
+                </TableCell>
+                <TableCell sx={{ fontSize: "0.8rem" }}>
+                  {row.lowestBid}
+                </TableCell>
+                <TableCell sx={{ fontSize: "0.8rem" }}>{row.expires}</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell>{row.item}</TableCell>
-                  <TableCell>{row.bidPrice}</TableCell>
-                  <TableCell>{row.highestBid}</TableCell>
-                  <TableCell>{row.lowestBid}</TableCell>
-                  <TableCell>{row.expires}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </TabPanel>
-      <TabPanel value={tabValue} index={1}>
-        <Typography variant="body1">No pending purchases.</Typography>
-      </TabPanel>
-      <TabPanel value={tabValue} index={2}>
-        <Typography variant="body1">No purchase history available.</Typography>
-      </TabPanel>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
-  );
-}
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
   );
 }
 
 const Dashboard = () => {
   return (
     <div>
-      <Header title={"My Dashboard"} navText={"User / My Dashobard"} />
+      <Header title={"Dashboard"} navText={"User / Dashboard"} />
       <UserProfileCard>
         <Cards />
         <PurchasingTable />
