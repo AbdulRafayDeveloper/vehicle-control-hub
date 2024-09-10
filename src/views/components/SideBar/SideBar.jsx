@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef, useState } from "react";
 import {
   Avatar,
   Box,
@@ -15,6 +16,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import GavelIcon from "@mui/icons-material/Gavel";
@@ -27,6 +29,33 @@ import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const SideBar = () => {
+  const fileInputRef = useRef(null);
+  const [avatarSrc, setAvatarSrc] = useState(
+    "https://i.pravatar.cc/150?img=12"
+  );
+
+  const handleEditClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (
+      file &&
+      (file.type === "image/png" ||
+        file.type === "image/jpeg" ||
+        file.type === "image/jpg")
+    ) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setAvatarSrc(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert("Please select a valid image file (png, jpg, jpeg)");
+    }
+  };
   return (
     <Box
       sx={{
@@ -41,11 +70,36 @@ const SideBar = () => {
         marginY: "1rem",
       }}
     >
-      <Avatar
-        alt="Percy Reed"
-        src="https://i.pravatar.cc/150?img=12"
-        sx={{ width: 70, height: 70, mb: 1 }}
-      />
+      <div style={{ position: "relative", display: "inline-block" }}>
+        <Avatar
+          alt="Percy Reed"
+          src={avatarSrc} // Use dynamic state for the avatar source
+          sx={{ width: 70, height: 70, mb: 1 }}
+        />
+        <IconButton
+          onClick={handleEditClick}
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            backgroundColor: "white",
+            boxShadow: 1,
+            width: 25,
+            height: 25,
+            outline: "none",
+          }}
+          size="small"
+        >
+          <EditIcon fontSize="small" />
+        </IconButton>
+        <input
+          type="file"
+          ref={fileInputRef}
+          accept="image/png, image/jpeg" // Allow only image files
+          style={{ display: "none" }} // Hide the file input
+          onChange={handleFileChange} // Handle file change event
+        />
+      </div>
       <Typography variant="body1" fontWeight={"bold"}>
         Percy Reed
       </Typography>
@@ -54,42 +108,48 @@ const SideBar = () => {
       </Typography>
 
       <List sx={{ width: "90%", mt: 1 }}>
-        <ListItem>
-          <div className="flex gap-2">
-            <DashboardOutlinedIcon
-              color="primary"
-              fontSize="small"
-              className="mt-1"
-            />
-            <ListItemText
-              primary="Dashboard"
-              primaryTypographyProps={{ fontSize: "0.8rem" }}
-            />
-          </div>
-        </ListItem>
-        <ListItem className="-mt-3">
-          <div className="flex gap-2">
-            <PersonOutlinedIcon
-              color="primary"
-              fontSize="small"
-              className="mt-1"
-            />
-            <ListItemText
-              primary="Personal Profile"
-              primaryTypographyProps={{ fontSize: "0.8rem" }}
-            />
-          </div>
-        </ListItem>
+        <Link underline="none" color="inherit" href="/user/Dashboard">
+          <ListItem>
+            <div className="flex gap-2">
+              <DashboardOutlinedIcon
+                color="primary"
+                fontSize="small"
+                className="mt-1"
+              />
+              <ListItemText
+                primary="Dashboard"
+                primaryTypographyProps={{ fontSize: "0.8rem" }}
+              />
+            </div>
+          </ListItem>
+        </Link>
+        <Link underline="none" color="inherit" href="/user/profile">
+          <ListItem className="-mt-3">
+            <div className="flex gap-2">
+              <PersonOutlinedIcon
+                color="primary"
+                fontSize="small"
+                className="mt-1"
+              />
+              <ListItemText
+                primary="Personal Profile"
+                primaryTypographyProps={{ fontSize: "0.8rem" }}
+              />
+            </div>
+          </ListItem>
+        </Link>
 
-        <ListItem className="-mt-3">
-          <div className="flex gap-2">
-            <GavelIcon color="primary" fontSize="small" className="mt-1" />
-            <ListItemText
-              primary="My Bids"
-              primaryTypographyProps={{ fontSize: "0.8rem" }}
-            />
-          </div>
-        </ListItem>
+        <Link underline="none" color="inherit" href="/user/bids">
+          <ListItem className="-mt-3">
+            <div className="flex gap-2">
+              <GavelIcon color="primary" fontSize="small" className="mt-1" />
+              <ListItemText
+                primary="My Bids"
+                primaryTypographyProps={{ fontSize: "0.8rem" }}
+              />
+            </div>
+          </ListItem>
+        </Link>
 
         <ListItem className="-mt-3">
           <div className="flex gap-2">
@@ -105,47 +165,53 @@ const SideBar = () => {
           </div>
         </ListItem>
 
-        <ListItem className="-mt-3">
-          <div className="flex gap-2">
-            <NotificationsNoneOutlinedIcon
-              color="primary"
-              fontSize="small"
-              className="mt-1"
-            />
-            <ListItemText
-              primary="My Notification"
-              primaryTypographyProps={{ fontSize: "0.8rem" }}
-            />
-          </div>
-        </ListItem>
+        <Link underline="none" color="inherit" href="/user/notifications">
+          <ListItem className="-mt-3">
+            <div className="flex gap-2">
+              <NotificationsNoneOutlinedIcon
+                color="primary"
+                fontSize="small"
+                className="mt-1"
+              />
+              <ListItemText
+                primary="My Notification"
+                primaryTypographyProps={{ fontSize: "0.8rem" }}
+              />
+            </div>
+          </ListItem>
+        </Link>
 
-        <ListItem className="-mt-3">
-          <div className="flex gap-2">
-            <StarBorderOutlinedIcon
-              color="primary"
-              fontSize="small"
-              className="mt-1"
-            />
-            <ListItemText
-              primary="My Favorite"
-              primaryTypographyProps={{ fontSize: "0.8rem" }}
-            />
-          </div>
-        </ListItem>
+        <Link underline="none" color="inherit" href="/user/favorites">
+          <ListItem className="-mt-3">
+            <div className="flex gap-2">
+              <StarBorderOutlinedIcon
+                color="primary"
+                fontSize="small"
+                className="mt-1"
+              />
+              <ListItemText
+                primary="My Favorite"
+                primaryTypographyProps={{ fontSize: "0.8rem" }}
+              />
+            </div>
+          </ListItem>
+        </Link>
 
-        <ListItem className="-mt-3">
-          <div className="flex gap-2">
-            <FavoriteBorderOutlinedIcon
-              color="primary"
-              fontSize="small"
-              className="mt-1"
-            />
-            <ListItemText
-              primary="My WatchList"
-              primaryTypographyProps={{ fontSize: "0.8rem" }}
-            />
-          </div>
-        </ListItem>
+        <Link underline="none" color="inherit" href="/user/watch-list">
+          <ListItem className="-mt-3">
+            <div className="flex gap-2">
+              <FavoriteBorderOutlinedIcon
+                color="primary"
+                fontSize="small"
+                className="mt-1"
+              />
+              <ListItemText
+                primary="My WatchList"
+                primaryTypographyProps={{ fontSize: "0.8rem" }}
+              />
+            </div>
+          </ListItem>
+        </Link>
       </List>
     </Box>
   );

@@ -208,13 +208,21 @@ function PurchasingTable() {
       <Typography variant="body1" fontWeight={"bold"}>
         Purchasing
       </Typography>
-      <Tabs className="-ml-4">
+      <Tabs className="-ml-4" sx={{ borderBottom: "none" }}>
         <Tab
           label="Current"
           sx={{
             textTransform: "capitalize",
             fontWeight: "bold",
             fontSize: "0.9rem",
+            outline: "none",
+            border: "none",
+            "&.Mui-selected": {
+              border: "none",
+            },
+            "&:focus": {
+              outline: "none",
+            },
           }}
         />
         <Tab
@@ -223,6 +231,10 @@ function PurchasingTable() {
             textTransform: "capitalize",
             fontWeight: "bold",
             fontSize: "0.9rem",
+            border: "none",
+            "&:focus": {
+              outline: "none",
+            },
           }}
         />
         <Tab
@@ -231,9 +243,14 @@ function PurchasingTable() {
             textTransform: "capitalize",
             fontWeight: "bold",
             fontSize: "0.9rem",
+            border: "none",
+            "&:focus": {
+              outline: "none",
+            },
           }}
         />
       </Tabs>
+
       <hr className="-mt-3" />
       <div className="bg-blue-500 h-0.5 w-16"></div>
 

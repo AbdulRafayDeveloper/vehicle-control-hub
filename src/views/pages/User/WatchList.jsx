@@ -7,6 +7,8 @@ import {
   Grid,
   Button,
   IconButton,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
@@ -199,11 +201,19 @@ const CarCard = () => {
 };
 
 const WatchList = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <div>
       <Header title={"My Watchlist"} navText={"User / My Watchlist"} />
       <UserProfileCard>
-        <Grid container>
+        <Grid
+          sx={{
+            display: "flex",
+            flexDirection: isSmallScreen ? "column" : "row",
+            gap: isSmallScreen ? "18px" : 0,
+          }}
+        >
           <CarCard />
           <CarCard />
         </Grid>
