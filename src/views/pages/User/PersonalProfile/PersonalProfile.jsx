@@ -49,14 +49,14 @@ function PersonalInfoForm() {
           <Box
             sx={{
               width: "100%",
-              overflowX: isSmallScreen ? "auto" : "hidden", // Enables horizontal scrolling only on small screens
+              overflowX: isSmallScreen ? "auto" : "hidden",
             }}
           >
             <Tabs
               value={tabIndex}
               onChange={handleTabChange}
-              variant={isSmallScreen ? "scrollable" : "standard"} // Makes tabs scrollable on small screens
-              scrollButtons={isSmallScreen ? "auto" : "off"} // Adds scroll buttons if necessary on small screens
+              variant={isSmallScreen ? "scrollable" : "standard"}
+              scrollButtons={isSmallScreen ? "auto" : "off"}
               sx={{
                 borderBottom: 1,
                 borderColor: "divider",
@@ -65,7 +65,6 @@ function PersonalInfoForm() {
                 style: { backgroundColor: "blue" },
               }}
             >
-              {/* Tabs content remains unchanged */}
               <Tab
                 label="Personal Information"
                 icon={

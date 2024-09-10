@@ -276,7 +276,14 @@ const UserProfileCard = ({ children, tips }) => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <div className="p-3">
+    <div
+      className="p-3"
+      style={{
+        backgroundImage: `url(/src/assets/bg-img2.png)`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center", // positions the image at the bottom
+      }}
+    >
       <Grid
         container
         justifyContent={"flex-end"}
@@ -288,7 +295,7 @@ const UserProfileCard = ({ children, tips }) => {
         <Grid item xs={12} sm={3} marginLeft={isSmallScreen ? "10px" : "120px"}>
           <SideBar />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} sx={{ backgroundColor: "white" }}>
           <Box marginY={"1rem"}>{children}</Box>
         </Grid>
       </Grid>

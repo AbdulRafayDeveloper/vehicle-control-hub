@@ -52,8 +52,15 @@ const Cards = () => {
           }}
         >
           <CardActionArea>
-            <CardMedia sx={{ paddingTop: "5px" }}>
-              <MonetizationOnOutlinedIcon color="primary" fontSize="large" />
+            <CardMedia
+              sx={{
+                paddingTop: "5px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img src="/src/assets/bids.png" className="w-16 h-16"></img>
             </CardMedia>
             <CardContent className="-mt-2">
               <Typography
@@ -88,8 +95,15 @@ const Cards = () => {
           }}
         >
           <CardActionArea>
-            <CardMedia sx={{ paddingTop: "5px" }}>
-              <EmojiEventsOutlinedIcon color="primary" fontSize="large" />
+            <CardMedia
+              sx={{
+                paddingTop: "5px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img src="/src/assets/win.png" className="w-16 h-16"></img>
             </CardMedia>
             <CardContent className="-mt-2">
               <Typography
@@ -124,8 +138,15 @@ const Cards = () => {
           }}
         >
           <CardActionArea>
-            <CardMedia sx={{ paddingTop: "5px" }}>
-              <AutoAwesomeOutlinedIcon color="primary" fontSize="large" />
+            <CardMedia
+              sx={{
+                paddingTop: "5px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img src="/src/assets/favorites.png" className="w-16 h-16"></img>
             </CardMedia>
             <CardContent className="-mt-2">
               <Typography
@@ -156,6 +177,10 @@ const Cards = () => {
   );
 };
 function PurchasingTable() {
+  const [tabIndex, setTabIndex] = useState(0);
+  const handleTabChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
   const data = [
     {
       item: "2018 Hyundai Sonata",
@@ -208,7 +233,15 @@ function PurchasingTable() {
       <Typography variant="body1" fontWeight={"bold"}>
         Purchasing
       </Typography>
-      <Tabs className="-ml-4" sx={{ borderBottom: "none" }}>
+      <Tabs
+        className="-ml-4"
+        sx={{ borderBottom: 1, borderColor: "divider" }}
+        value={tabIndex}
+        onChange={handleTabChange}
+        TabIndicatorProps={{
+          style: { backgroundColor: "blue" },
+        }}
+      >
         <Tab
           label="Current"
           sx={{
@@ -250,9 +283,6 @@ function PurchasingTable() {
           }}
         />
       </Tabs>
-
-      <hr className="-mt-3" />
-      <div className="bg-blue-500 h-0.5 w-16"></div>
 
       <TableContainer>
         <Table>

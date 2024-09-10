@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, TextField, Typography } from "@mui/material";
+import { Box, Grid, TextField, Typography, Button } from "@mui/material";
 import { height } from "@mui/system";
 
 const PersonalInformation = () => (
@@ -131,6 +131,17 @@ const PersonalInformation = () => (
             placeholder="someone@email.com"
             size="small"
           />
+        </Grid>
+        {/* Continue */}
+        <Grid item xs={12} md={7} marginTop={"15px"}>
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            sx={{ marginTop: 3, textTransform: "capitalize" }}
+          >
+            Submit
+          </Button>
         </Grid>
       </Grid>
     </Box>
