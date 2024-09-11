@@ -179,7 +179,7 @@ function PurchasingTable() {
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
-  const data = [
+  const currentData = [
     {
       item: "2018 Hyundai Sonata",
       bidPrice: "$1,775.00",
@@ -216,6 +216,48 @@ function PurchasingTable() {
       expires: "7/2/2024",
     },
   ];
+  const pendingData = [
+    {
+      item: "2019 Toyota Corolla",
+      bidPrice: "$1,500.00",
+      highestBid: "$1,600.00",
+      lowestBid: "$1,200.00",
+      expires: "7/10/2024",
+    },
+    {
+      item: "2019 Toyota Corolla",
+      bidPrice: "$1,500.00",
+      highestBid: "$1,600.00",
+      lowestBid: "$1,200.00",
+      expires: "7/10/2024",
+    },
+  ];
+
+  const historyData = [
+    {
+      item: "2017 Honda City",
+      bidPrice: "$2,000.00",
+      highestBid: "$2,100.00",
+      lowestBid: "$1,800.00",
+      expires: "6/20/2023",
+    },
+    {
+      item: "2017 Honda City",
+      bidPrice: "$2,000.00",
+      highestBid: "$2,100.00",
+      lowestBid: "$1,800.00",
+      expires: "6/20/2023",
+    },
+    {
+      item: "2017 Honda City",
+      bidPrice: "$2,000.00",
+      highestBid: "$2,100.00",
+      lowestBid: "$1,800.00",
+      expires: "6/20/2023",
+    },
+  ];
+  const data =
+    tabIndex === 0 ? currentData : tabIndex === 1 ? pendingData : historyData;
 
   return (
     <Box
