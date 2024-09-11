@@ -83,7 +83,7 @@ const Password = () => {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
-                  onClick={handleTogglePasswordVisibility}
+                  onClick={handleToggleConfirmPasswordVisibility}
                   edge="end"
                   sx={{
                     "&:focus": {

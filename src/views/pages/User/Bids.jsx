@@ -126,7 +126,7 @@ export default function Bids() {
     <div>
       <Header title={"My Bids"} navText={"User / My Bids"} />
       <UserProfileCard tips={<SafetyTips />}>
-        <Box textAlign={"left"}>
+        <Box textAlign={"left"} sx={{ backgroundColor: "white" }}>
           <Stack
             direction={isMobile ? "column" : "row"}
             spacing={2}

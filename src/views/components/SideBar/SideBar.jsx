@@ -1,5 +1,6 @@
 import React from "react";
 import { useRef, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -108,8 +109,11 @@ const SideBar = () => {
       </Typography>
 
       <List sx={{ width: "90%", mt: 1 }}>
-        <Link underline="none" color="inherit" href="/user/Dashboard">
-          <ListItem>
+        <ListItem className="-mt-3 hover:text-blue-500">
+          <RouterLink
+            to="/user/dashboard"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <div className="flex gap-2">
               <DashboardOutlinedIcon
                 color="primary"
@@ -118,13 +122,18 @@ const SideBar = () => {
               />
               <ListItemText
                 primary="Dashboard"
-                primaryTypographyProps={{ fontSize: "0.8rem" }}
+                primaryTypographyProps={{
+                  fontSize: "0.8rem",
+                }}
               />
             </div>
-          </ListItem>
-        </Link>
-        <Link underline="none" color="inherit" href="/user/profile">
-          <ListItem className="-mt-3">
+          </RouterLink>
+        </ListItem>
+        <ListItem className="-mt-3 hover:text-blue-500">
+          <RouterLink
+            to="/user/profile"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <div className="flex gap-2">
               <PersonOutlinedIcon
                 color="primary"
@@ -133,40 +142,54 @@ const SideBar = () => {
               />
               <ListItemText
                 primary="Personal Profile"
-                primaryTypographyProps={{ fontSize: "0.8rem" }}
+                primaryTypographyProps={{
+                  fontSize: "0.8rem",
+                }}
               />
             </div>
-          </ListItem>
-        </Link>
+          </RouterLink>
+        </ListItem>
 
-        <Link underline="none" color="inherit" href="/user/bids">
-          <ListItem className="-mt-3">
+        <ListItem className="-mt-3 hover:text-blue-500">
+          <RouterLink
+            to="/user/bids"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <div className="flex gap-2">
               <GavelIcon color="primary" fontSize="small" className="mt-1" />
               <ListItemText
                 primary="My Bids"
-                primaryTypographyProps={{ fontSize: "0.8rem" }}
+                primaryTypographyProps={{
+                  fontSize: "0.8rem",
+                }}
               />
             </div>
-          </ListItem>
-        </Link>
-
-        <ListItem className="-mt-3">
-          <div className="flex gap-2">
-            <EmojiEventsOutlinedIcon
-              color="primary"
-              fontSize="small"
-              className="mt-1"
-            />
-            <ListItemText
-              primary="Winning Bids"
-              primaryTypographyProps={{ fontSize: "0.8rem" }}
-            />
-          </div>
+          </RouterLink>
         </ListItem>
 
-        <Link underline="none" color="inherit" href="/user/notifications">
-          <ListItem className="-mt-3">
+        <ListItem className="-mt-3 hover:text-blue-500">
+          <RouterLink style={{ textDecoration: "none", color: "inherit" }}>
+            <div className="flex gap-2">
+              <EmojiEventsOutlinedIcon
+                color="primary"
+                fontSize="small"
+                className="mt-1"
+              />
+              <ListItemText
+                primary="Wining Bids"
+                primaryTypographyProps={{
+                  fontSize: "0.8rem",
+                }}
+              />
+            </div>
+          </RouterLink>
+        </ListItem>
+
+        <ListItem className="-mt-3 hover:text-blue-500">
+          <RouterLink
+            to="/user/notifications"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <div className="flex gap-2">
               <NotificationsNoneOutlinedIcon
                 color="primary"
@@ -175,14 +198,19 @@ const SideBar = () => {
               />
               <ListItemText
                 primary="My Notification"
-                primaryTypographyProps={{ fontSize: "0.8rem" }}
+                primaryTypographyProps={{
+                  fontSize: "0.8rem",
+                }}
               />
             </div>
-          </ListItem>
-        </Link>
+          </RouterLink>
+        </ListItem>
 
-        <Link underline="none" color="inherit" href="/user/favorites">
-          <ListItem className="-mt-3">
+        <ListItem className="-mt-3 hover:text-blue-500">
+          <RouterLink
+            to="/user/favorites"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <div className="flex gap-2">
               <StarBorderOutlinedIcon
                 color="primary"
@@ -190,15 +218,20 @@ const SideBar = () => {
                 className="mt-1"
               />
               <ListItemText
-                primary="My Favorite"
-                primaryTypographyProps={{ fontSize: "0.8rem" }}
+                primary="My Favorites"
+                primaryTypographyProps={{
+                  fontSize: "0.8rem",
+                }}
               />
             </div>
-          </ListItem>
-        </Link>
+          </RouterLink>
+        </ListItem>
 
-        <Link underline="none" color="inherit" href="/user/watch-list">
-          <ListItem className="-mt-3">
+        <ListItem className="-mt-3 hover:text-blue-500">
+          <RouterLink
+            to="/user/watch-list"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <div className="flex gap-2">
               <FavoriteBorderOutlinedIcon
                 color="primary"
@@ -207,11 +240,13 @@ const SideBar = () => {
               />
               <ListItemText
                 primary="My WatchList"
-                primaryTypographyProps={{ fontSize: "0.8rem" }}
+                primaryTypographyProps={{
+                  fontSize: "0.8rem",
+                }}
               />
             </div>
-          </ListItem>
-        </Link>
+          </RouterLink>
+        </ListItem>
       </List>
     </Box>
   );
@@ -295,7 +330,7 @@ const UserProfileCard = ({ children, tips }) => {
         <Grid item xs={12} sm={3} marginLeft={isSmallScreen ? "10px" : "120px"}>
           <SideBar />
         </Grid>
-        <Grid item xs={12} sm={6} sx={{ backgroundColor: "white" }}>
+        <Grid item xs={12} sm={6}>
           <Box marginY={"1rem"}>{children}</Box>
         </Grid>
       </Grid>

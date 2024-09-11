@@ -212,6 +212,7 @@ const WatchList = () => {
             display: "flex",
             flexDirection: isSmallScreen ? "column" : "row",
             gap: isSmallScreen ? "18px" : 0,
+            backgroundColor: "white",
           }}
         >
           <CarCard />

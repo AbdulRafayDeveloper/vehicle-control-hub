@@ -6,9 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
-import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
+
 import {
   useTheme,
   useMediaQuery,
@@ -228,6 +226,7 @@ function PurchasingTable() {
         borderRadius: 2,
         marginTop: "1rem",
         textAlign: "left",
+        backgroundColor: "white",
       }}
     >
       <Typography variant="body1" fontWeight={"bold"}>

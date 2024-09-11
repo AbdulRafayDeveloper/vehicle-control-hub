@@ -3,13 +3,14 @@ import { Box, Grid, Typography, Button, IconButton } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 const Documentation = () => {
-  const [fileName, setFileName] = useState("");
+  const [fileNames, setFileNames] = useState([]);
   const [isUploaded, setIsUploaded] = useState(false);
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFileName(file.name);
+    const files = Array.from(e.target.files);
+    if (files.length > 0) {
+      const fileNamesArray = files.map((file) => file.name);
+      setFileNames(fileNamesArray);
       setIsUploaded(true);
     }
   };
@@ -57,10 +58,11 @@ const Documentation = () => {
                 variant="body2"
                 sx={{ marginLeft: "10px", fontSize: "0.8rem" }}
               >
-                {fileName || "No file chosen"}
+                {fileNames.length > 0 ? fileNames.join(", ") : "No file chosen"}
               </Typography>
               <input
                 type="file"
+                multiple
                 onChange={handleFileChange}
                 style={{
                   opacity: 0,

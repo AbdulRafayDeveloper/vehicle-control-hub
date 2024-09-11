@@ -44,6 +44,7 @@ function PersonalInfoForm() {
             boxShadow: 4,
             borderRadius: 2,
             paddingBottom: "2rem",
+            backgroundColor: "white",
           }}
         >
           <Box
