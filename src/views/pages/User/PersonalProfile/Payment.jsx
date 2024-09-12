@@ -75,7 +75,7 @@ const PaymentForm = () => {
         {
           type: "paypal",
           logo: "/src/assets/paypal-logo.png",
-          number: paypalEmail,
+          number: newCard.number,
         },
       ]);
     }
@@ -108,7 +108,7 @@ const PaymentForm = () => {
           <Card
             key={index}
             sx={{
-              backgroundColor: card.type === "paypal" ? "#003087" : "#023B8D",
+              backgroundColor: card.type === "paypal" ? "grey" : "#023B8D",
               color: "#fff",
               borderRadius: 2,
               height: "80px",
@@ -292,6 +292,41 @@ const PaymentForm = () => {
                 onChange={(e) => setPaypalEmail(e.target.value)}
                 className="text-xs border border-black px-3 py-1.5 w-full rounded-lg"
               />
+            </Grid>
+            <Grid item xs={12} md={5}>
+              <label className="my-1 text-xs text-gray-500">Card Number</label>
+              <br />
+              <input
+                type="text"
+                placeholder="XXXX XXXX XXXX XXXX"
+                value={newCard.number}
+                onChange={(e) =>
+                  setNewCard({ ...newCard, number: e.target.value })
+                }
+                className="text-xs border border-black px-3 py-1.5 w-full rounded-lg"
+              />
+            </Grid>
+
+            <Grid item xs={12} md={5}>
+              <label className="my-1 text-xs text-gray-500">Name on Card</label>
+              <br />
+              <input
+                type="text"
+                placeholder="Full Name"
+                className="text-xs border border-black px-3 py-1.5 w-full rounded-lg"
+              />
+            </Grid>
+            <Grid item xs={12} md={5}>
+              <label className="my-1 text-xs text-gray-500">CVV</label>
+              <br />
+              <div className="flex">
+                <input
+                  type="text"
+                  placeholder="XXX"
+                  className="text-xs border border-black px-3 py-1.5 w-full rounded-lg"
+                />
+                <CalendarToday fontSize="small" className="-ml-7 mt-1" />
+              </div>
             </Grid>
           </Grid>
         )}

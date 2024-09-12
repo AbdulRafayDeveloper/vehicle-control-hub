@@ -6,29 +6,36 @@ import {
   Typography,
   Grid,
   Button,
+  IconButton,
   useTheme,
   useMediaQuery,
-  IconButton,
 } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import GavelIcon from "@mui/icons-material/Gavel";
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import OfflineBoltOutlinedIcon from "@mui/icons-material/OfflineBoltOutlined";
 import { styled } from "@mui/system";
 import Header from "../../components/Header/Header";
 import UserProfileCard from "../../components/SideBar/SideBar";
 
-const carData = {
-  title: "Audi A5",
-  engine: "1.8 Litres",
-  grade: "Grade",
-  year: 2018,
-  mileage: "147,896 Km",
-  lotNumber: "58939794",
-  currentBid: "876.00",
-  buyNow: "5,000.00",
-  bids: 30,
-  imageUrl:
-    "https://mediaservice.audi.com/media/fast/H4sIAAAAAAAAAFvzloG1tIiBOTrayfuvpGh6-m1zJgaGigIGBgZGoDhTtNOaz-I_2DhCHsCEtzEwF-SlMwJZKUycmbmJ6an6QD4_I3taTmV-aUkxO0grT6IZW1LM5FXvttkx5OyX3LxWaWLSLgZWoC7GeUCCWQhI8KUBCU5VBjAJMm8-iLAD8ZksmRkYWCuAjEgGEODjKy3KKUgsSszVK89MKckQ1DAgEgizu7iGOHr6BAMAWEMXeOkAAAA?wid=850", // Example image, replace with actual image URL
-};
+const carDataList = [
+  {
+    title: "Audi A5",
+    engine: "1.8 Litres",
+    grade: "Grade",
+    year: 2018,
+    mileage: "147,896 Km",
+    lotNumber: "58939794",
+    currentBid: "876.00",
+    buyNow: "5,000.00",
+    bids: 30,
+    imageUrl:
+      "https://mediaservice.audi.com/media/fast/H4sIAAAAAAAAAFvzloG1tIiBOTrayfuvpGh6-m1zJgaGigIGBgZGoDhTtNOaz-I_2DhCHsCEtzEwF-SlMwJZKUycmbmJ6an6QD4_I3taTmV-aUkxO0grT6IZW1LM5FXvttkx5OyX3LxWaWLSLgZWoC7GeUCCWQhI8KUBCU5VBjAJMm8-iLAD8ZksmRkYWCuAjEgGEODjKy3KKUgsSszVK89MKckQ1DAgEgizu7iGOHr6BAMAWEMXeOkAAAA?wid=850",
+  },
+];
 
 const SubmitBidButton = styled(Button)({
   background: "linear-gradient(to right, #6b73ff, #000dff)",
@@ -36,7 +43,7 @@ const SubmitBidButton = styled(Button)({
   width: "100%",
 });
 
-const CarCard = () => {
+const CarCard = ({ carData }) => {
   return (
     <Card
       sx={{
@@ -50,38 +57,10 @@ const CarCard = () => {
     >
       <CardMedia
         component="img"
-        image="/src/assets/car.png"
+        image={carData.imageUrl}
         alt={carData.title}
         sx={{ borderRadius: 2 }}
       />
-      <CardMedia
-        component="img"
-        image="/src/assets/favourite.png"
-        alt={carData.title}
-        sx={{
-          position: "absolute",
-          top: "15px",
-          right: "10px",
-          width: 35,
-          height: 35,
-        }}
-      />
-
-      {/* <IconButton
-        sx={{
-          position: "absolute",
-          top: "15px",
-          right: "10px",
-          backgroundColor: "white",
-          boxShadow: 2,
-          color: "orange",
-          width: 0,
-          height: 30,
-        }}
-      >
-        <StarBorderOutlinedIcon fontSize="small" />
-      </IconButton> */}
-
       <CardContent>
         <Grid container justifyContent={"space-between"}>
           <Typography variant="body2" component="div">
@@ -152,32 +131,6 @@ const CarCard = () => {
           </Grid>
         </Grid>
         <hr />
-        <Grid container justifyContent={"space-between"}>
-          <Grid item>
-            <Grid container alignItems="center" gap={0.4}>
-              <Grid item>
-                <AccessTimeIcon color="primary" fontSize="small" />
-              </Grid>
-              <Grid item>
-                <Typography fontSize={"0.7rem"} marginTop={1}>
-                  0d: 3h: 8m: 8s
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid container alignItems="center" gap={0.4}>
-              <Grid item>
-                <LocalOfferIcon color="secondary" fontSize="small" />
-              </Grid>
-              <Grid item>
-                <Typography fontSize={"0.7rem"} marginTop={1}>
-                  {carData.bids} Bids
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
         <SubmitBidButton
           variant="contained"
           sx={{
@@ -198,19 +151,22 @@ const CarCard = () => {
 const Favorites = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <div>
-      <Header title={"My Favorite"} navText={"User / My Favorite"} />
+      <Header title={"My Favorites"} navText={"User / My Favorites"} />
       <UserProfileCard>
         <Grid
           sx={{
             display: "flex",
             flexDirection: isSmallScreen ? "column" : "row",
             gap: isSmallScreen ? "18px" : 0,
+            backgroundColor: "white",
           }}
         >
-          <CarCard />
-          <CarCard />
+          {carDataList.map((carData, index) => (
+            <CarCard key={index} carData={carData} />
+          ))}
         </Grid>
       </UserProfileCard>
     </div>

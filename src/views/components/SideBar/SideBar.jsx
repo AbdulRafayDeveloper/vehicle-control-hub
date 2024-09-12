@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -28,6 +28,7 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
+import { borderRadius, height } from "@mui/system";
 
 const SideBar = () => {
   const fileInputRef = useRef(null);
@@ -56,6 +57,14 @@ const SideBar = () => {
     } else {
       alert("Please select a valid image file (png, jpg, jpeg)");
     }
+  };
+  const location = useLocation(); // Get current URL
+  const isActive = (path) => location.pathname === path;
+  const activeStyle = {
+    backgroundColor: "#f0f0f0",
+    color: "#1976d2",
+    borderRadius: 2,
+    height: "30px",
   };
   return (
     <Box
@@ -109,7 +118,10 @@ const SideBar = () => {
       </Typography>
 
       <List sx={{ width: "90%", mt: 1 }}>
-        <ListItem className="-mt-3 hover:text-blue-500">
+        <ListItem
+          className="-mt-3 hover:text-blue-500"
+          sx={isActive("/user/dashboard") ? activeStyle : null}
+        >
           <RouterLink
             to="/user/dashboard"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -129,7 +141,10 @@ const SideBar = () => {
             </div>
           </RouterLink>
         </ListItem>
-        <ListItem className="-mt-3 hover:text-blue-500">
+        <ListItem
+          className="-mt-3 hover:text-blue-500"
+          sx={isActive("/user/profile") ? activeStyle : null}
+        >
           <RouterLink
             to="/user/profile"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -150,7 +165,10 @@ const SideBar = () => {
           </RouterLink>
         </ListItem>
 
-        <ListItem className="-mt-3 hover:text-blue-500">
+        <ListItem
+          className="-mt-3 hover:text-blue-500"
+          sx={isActive("/user/bids") ? activeStyle : null}
+        >
           <RouterLink
             to="/user/bids"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -185,7 +203,10 @@ const SideBar = () => {
           </RouterLink>
         </ListItem>
 
-        <ListItem className="-mt-3 hover:text-blue-500">
+        <ListItem
+          className="-mt-3 hover:text-blue-500"
+          sx={isActive("/user/notifications") ? activeStyle : null}
+        >
           <RouterLink
             to="/user/notifications"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -206,7 +227,10 @@ const SideBar = () => {
           </RouterLink>
         </ListItem>
 
-        <ListItem className="-mt-3 hover:text-blue-500">
+        <ListItem
+          className="-mt-3 hover:text-blue-500"
+          sx={isActive("/user/favorites") ? activeStyle : null}
+        >
           <RouterLink
             to="/user/favorites"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -227,7 +251,10 @@ const SideBar = () => {
           </RouterLink>
         </ListItem>
 
-        <ListItem className="-mt-3 hover:text-blue-500">
+        <ListItem
+          className="-mt-3 hover:text-blue-500"
+          sx={isActive("/user/watch-list") ? activeStyle : null}
+        >
           <RouterLink
             to="/user/watch-list"
             style={{ textDecoration: "none", color: "inherit" }}
