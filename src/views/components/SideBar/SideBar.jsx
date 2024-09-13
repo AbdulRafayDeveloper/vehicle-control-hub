@@ -69,7 +69,6 @@ const SideBar = () => {
   return (
     <Box
       sx={{
-        width: { xs: "100%", sm: 300 },
         bgcolor: "white",
         borderRadius: "10px",
         boxShadow: 4,
@@ -336,6 +335,9 @@ const SearchBar = () => {
 const UserProfileCard = ({ children, tips }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  // const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Mobile includes xs
+  // const isTablet = useMediaQuery(theme.breakpoints.between("sm", "lg")); // For tablets (up to large screens)
+  const isLaptop = useMediaQuery(theme.breakpoints.up("md")); // For laptops and up
 
   return (
     <div
@@ -353,11 +355,11 @@ const UserProfileCard = ({ children, tips }) => {
       >
         <SearchBar />
       </Grid>
-      <Grid container gap={1}>
-        <Grid item xs={12} sm={3} marginLeft={isSmallScreen ? "10px" : "120px"}>
+      <Grid container gap={2}>
+        <Grid item sm={4} md={3} marginLeft={isLaptop ? "120px" : "10px"}>
           <SideBar />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={7} md={6}>
           <Box marginY={"1rem"}>{children}</Box>
         </Grid>
       </Grid>

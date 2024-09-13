@@ -163,6 +163,7 @@ const CarCard = ({ carData }) => {
 const WatchList = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isLaptop = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <div>
@@ -171,8 +172,8 @@ const WatchList = () => {
         <Grid
           sx={{
             display: "flex",
-            flexDirection: isSmallScreen ? "column" : "row",
-            gap: isSmallScreen ? "18px" : 0,
+            flexDirection: isLaptop ? "row" : "column",
+            gap: isLaptop ? 0 : "18px",
             backgroundColor: "white",
           }}
         >
