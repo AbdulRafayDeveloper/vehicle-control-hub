@@ -10,13 +10,6 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
-import GavelIcon from "@mui/icons-material/Gavel";
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import OfflineBoltOutlinedIcon from "@mui/icons-material/OfflineBoltOutlined";
 import { styled } from "@mui/system";
 import Header from "../../components/Header/Header";
 import UserProfileCard from "../../components/SideBar/SideBar";

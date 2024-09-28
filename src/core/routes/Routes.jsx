@@ -18,7 +18,8 @@ import PersonalInfoForm from "../../views/pages/User/PersonalProfile/PersonalPro
 
 const ResetPassword = lazy(() => import("../../views/pages/Auth/RestPassword"));
 const RegisterForm = lazy(() => import("../../views/pages/Auth/Register.jsx"));
-const Admin = lazy(() => import("../../views/pages/Admin/AdminPortal.jsx"));
+// const Admin = lazy(() => import("../../views/pages/Admin/AdminPortal.jsx"));
+import Details from "../../views/pages/Admin/CarDetails.jsx";
 const Auctions = lazy(() =>
   import("../../views/pages/Auctions/LiveAuctions.jsx")
 );
@@ -64,8 +65,8 @@ export const routes = [
 
   // All public routes
   {
-    path: "/admin",
-    page: <Admin />,
+    path: "/admin/car-details",
+    page: <Details />,
     isProtected: true,
     aside: null,
   },

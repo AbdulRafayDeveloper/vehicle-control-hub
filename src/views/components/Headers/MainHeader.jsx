@@ -20,11 +20,16 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import { Search, Language, ArrowDropDown, Menu as MenuIcon } from "@mui/icons-material";
+import {
+  Search,
+  Language,
+  ArrowDropDown,
+  Menu as MenuIcon,
+} from "@mui/icons-material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getLanguages } from "../../../core/api/languageTranslation";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -37,7 +42,7 @@ const Header = () => {
   const userDetails = useSelector((state) => state.auth.user);
   const currentLanguage = useSelector((state) => state.language.language);
   const { t } = useTranslation();
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     const fetchLanguages = async () => {
@@ -78,17 +83,34 @@ const Header = () => {
   };
 
   const toggleDrawer = (open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setDrawerOpen(open);
   };
 
   return (
-    <AppBar position="static" sx={{ boxShadow: "none", borderBottom: "1px solid #ddd", backgroundColor: "#fff", paddingBottom: "10px" }}>
+    <AppBar
+      position="static"
+      sx={{
+        boxShadow: "none",
+        borderBottom: "1px solid #ddd",
+        backgroundColor: "#fff",
+        paddingBottom: "10px",
+      }}
+    >
       <Container maxWidth="lg">
         <Box
-          sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", height: "60px", py: 1 }}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "60px",
+            py: 1,
+          }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
@@ -105,15 +127,20 @@ const Header = () => {
               />
             </IconButton>
             {!isMobile && (
-            <InputBase
-              placeholder="Search Inventories"
-              startAdornment={<Search />}
-              sx={{ ml: 2, px: 2, py: 1, borderRadius: 10, backgroundColor: "#f0f0f0", width: "300px" }}
-            />
-          )}
+              <InputBase
+                placeholder="Search Inventories"
+                startAdornment={<Search />}
+                sx={{
+                  ml: 2,
+                  px: 2,
+                  py: 1,
+                  borderRadius: 10,
+                  backgroundColor: "#f0f0f0",
+                  width: "300px",
+                }}
+              />
+            )}
           </Box>
-
-         
 
           {!isMobile && (
             <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -126,7 +153,10 @@ const Header = () => {
                 onClose={handleLanguageClose}
               >
                 {languages.map((lang) => (
-                  <MenuItem key={lang.code} onClick={() => changeLanguage(lang)}>
+                  <MenuItem
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang)}
+                  >
                     {lang.name}
                   </MenuItem>
                 ))}
@@ -140,7 +170,7 @@ const Header = () => {
                 sx={{ ml: 2 }}
                 onClick={handleMenu}
               >
-                {userDetails?.username ? 'Logout' : 'Login'}
+                {userDetails?.username ? "Logout" : "Login"}
               </Button>
               {userDetails?.username && (
                 <Menu
@@ -148,9 +178,7 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleLogOut}>
-                    {t("logout")}
-                  </MenuItem>
+                  <MenuItem onClick={handleLogOut}>{t("logout")}</MenuItem>
                 </Menu>
               )}
             </Box>
@@ -169,11 +197,24 @@ const Header = () => {
         </Box>
 
         {isMobile && (
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", mt: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: 1,
+            }}
+          >
             <InputBase
               placeholder="Search Inventories"
               startAdornment={<Search />}
-              sx={{ px: 2, py: 1, borderRadius: 10, backgroundColor: "#f0f0f0", width: "100%" }}
+              sx={{
+                px: 2,
+                py: 1,
+                borderRadius: 10,
+                backgroundColor: "#f0f0f0",
+                width: "100%",
+              }}
             />
           </Box>
         )}
@@ -190,7 +231,7 @@ const Header = () => {
                 <ListItemText primary="Home" />
               </ListItem>
               <ListItem button component={Link} to="/inventory">
-                <ListItemText primary="Inventory"  />
+                <ListItemText primary="Inventory" />
               </ListItem>
               <ListItem button>
                 <ListItemText primary="Auctions" />
@@ -206,7 +247,13 @@ const Header = () => {
               </ListItem>
               <Divider />
               <ListItem button onClick={handleLanguageMenu}>
-                <ListItemText primary={<><Language /> {currentLanguage} <ArrowDropDown /></>} />
+                <ListItemText
+                  primary={
+                    <>
+                      <Language /> {currentLanguage} <ArrowDropDown />
+                    </>
+                  }
+                />
               </ListItem>
               <Menu
                 anchorEl={languageAnchorEl}
@@ -214,7 +261,10 @@ const Header = () => {
                 onClose={handleLanguageClose}
               >
                 {languages.map((lang) => (
-                  <MenuItem key={lang.code} onClick={() => changeLanguage(lang)}>
+                  <MenuItem
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang)}
+                  >
                     {lang.name}
                   </MenuItem>
                 ))}
@@ -224,7 +274,9 @@ const Header = () => {
               </ListItem>
               <Divider />
               <ListItem button onClick={handleMenu}>
-                <ListItemText primary={userDetails?.username ? 'Logout' : 'Login'} />
+                <ListItemText
+                  primary={userDetails?.username ? "Logout" : "Login"}
+                />
               </ListItem>
               {userDetails?.username && (
                 <Menu
@@ -232,9 +284,7 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleLogOut}>
-                    {t("logout")}
-                  </MenuItem>
+                  <MenuItem onClick={handleLogOut}>{t("logout")}</MenuItem>
                 </Menu>
               )}
             </List>
@@ -243,11 +293,20 @@ const Header = () => {
 
         {!isMobile && (
           <Box>
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <Button
                 sx={{
                   color: "#000",
-                  borderBottom: location.pathname === "/home" ? "2px solid #1976d2" : "none",
+                  borderBottom:
+                    location.pathname === "/home"
+                      ? "2px solid #1976d2"
+                      : "none",
                 }}
                 component={Link}
                 to="/"
@@ -257,16 +316,23 @@ const Header = () => {
               <Button
                 sx={{
                   color: "#000",
-                  borderBottom: location.pathname === "/inventory" ? "2px solid #1976d2" : "none",
+                  borderBottom:
+                    location.pathname === "/inventory"
+                      ? "2px solid #1976d2"
+                      : "none",
                 }}
-                component={Link} to="/inventory"
+                component={Link}
+                to="/inventory"
               >
                 Inventory <ArrowDropDown />
               </Button>
               <Button
                 sx={{
                   color: "#000",
-                  borderBottom: location.pathname === "/auctions" ? "2px solid #1976d2" : "none",
+                  borderBottom:
+                    location.pathname === "/auctions"
+                      ? "2px solid #1976d2"
+                      : "none",
                 }}
               >
                 Auctions <ArrowDropDown />
@@ -274,7 +340,10 @@ const Header = () => {
               <Button
                 sx={{
                   color: "#000",
-                  borderBottom: location.pathname === "/locations" ? "2px solid #1976d2" : "none",
+                  borderBottom:
+                    location.pathname === "/locations"
+                      ? "2px solid #1976d2"
+                      : "none",
                 }}
                 component={Link}
                 to="/locations"
@@ -284,7 +353,10 @@ const Header = () => {
               <Button
                 sx={{
                   color: "#000",
-                  borderBottom: location.pathname === "/services" ? "2px solid #1976d2" : "none",
+                  borderBottom:
+                    location.pathname === "/services"
+                      ? "2px solid #1976d2"
+                      : "none",
                 }}
               >
                 Services & Support
@@ -292,7 +364,10 @@ const Header = () => {
               <Button
                 sx={{
                   color: "#000",
-                  borderBottom: location.pathname === "/help-center" ? "2px solid #1976d2" : "none",
+                  borderBottom:
+                    location.pathname === "/help-center"
+                      ? "2px solid #1976d2"
+                      : "none",
                 }}
                 component={Link}
                 to="/help-center"

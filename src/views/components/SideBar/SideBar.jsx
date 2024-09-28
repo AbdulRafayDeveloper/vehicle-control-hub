@@ -28,7 +28,6 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
-import { borderRadius, height } from "@mui/system";
 
 const SideBar = () => {
   const fileInputRef = useRef(null);
