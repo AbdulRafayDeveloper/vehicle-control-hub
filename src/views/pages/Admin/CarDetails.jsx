@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Admin from "../../components/AdminComponents/SideBar";
 import AdminHeader from "../../components/AdminComponents/Header";
 import { Button, MenuItem, Select } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 const header = (
   <AdminHeader title="Car details" subText="Below are the car details" />
@@ -61,20 +62,22 @@ const CarDetails = () => {
                   <MenuItem value="Pending">Pending</MenuItem>
                 </Select>
               </div>
-              <Button
-                variant="contained"
-                className="w-[135px] h-[30px]"
-                sx={{
-                  textTransform: "capitalize",
-                  fontSize: "12px",
-                  backgroundColor: "#05387A",
-                  ":hover": {
+              <RouterLink to={"../"}>
+                <Button
+                  variant="contained"
+                  className="w-[135px] h-[30px]"
+                  sx={{
+                    textTransform: "capitalize",
+                    fontSize: "12px",
                     backgroundColor: "#05387A",
-                  },
-                }}
-              >
-                Edit Car Details
-              </Button>
+                    ":hover": {
+                      backgroundColor: "#05387A",
+                    },
+                  }}
+                >
+                  Edit Car Details
+                </Button>
+              </RouterLink>
               <Button
                 variant="contained"
                 className="w-[180px] h-[30px]"
@@ -172,7 +175,7 @@ const CarDetails = () => {
 
           {/* Thumbnail grid */}
           <div className="grid grid-cols-5 gap-2">
-            {Array(5)
+            {Array(10)
               .fill()
               .map((_, i) => (
                 <img
