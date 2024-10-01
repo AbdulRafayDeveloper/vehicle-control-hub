@@ -1,5 +1,4 @@
-// Sidebar.js
-import * as React from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   List,
@@ -7,10 +6,12 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
-  Badge,
-  Grid,
+  IconButton,
   Box,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { BsBarChart } from "react-icons/bs";
 import { PiBriefcase } from "react-icons/pi";
 import { FaRegUser } from "react-icons/fa6";
@@ -20,172 +21,167 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Footer from "../AdminComponents/Footer";
 
-const SideBar = () => {
-  const [openProduct, setOpenProduct] = React.useState(false);
-  const [openAuction, setOpenAuction] = React.useState(false);
-  const [openUserManagement, setOpenUserManagement] = React.useState(false);
+const SideBar = ({ isOpen, toggleSidebar }) => {
+  const [openProduct, setOpenProduct] = useState(false);
+  const [openAuction, setOpenAuction] = useState(false);
+  const [openUserManagement, setOpenUserManagement] = useState(false);
 
-  const handleClickProduct = () => {
-    setOpenProduct(!openProduct);
-  };
-
-  const handleClickAuction = () => {
-    setOpenAuction(!openAuction);
-  };
-
-  const handleClickUserManagement = () => {
+  const handleClickProduct = () => setOpenProduct(!openProduct);
+  const handleClickAuction = () => setOpenAuction(!openAuction);
+  const handleClickUserManagement = () =>
     setOpenUserManagement(!openUserManagement);
-  };
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <Drawer
-      sx={{ width: 287, flexShrink: 0 }}
-      variant="permanent"
-      anchor="left"
-    >
-      <div>
-        <img
-          src="/src/assets/logo_bits.svg"
-          alt="logo"
-          width={106}
-          height={56.12}
-          className="mt-5 ml-14"
-        />
+    <>
+      {/* Hamburger Icon for mobile view */}
+      <div className="lg:hidden p-4">
+        <IconButton onClick={toggleSidebar}>
+          <MenuIcon />
+        </IconButton>
       </div>
-      <List sx={{ width: 280, paddingLeft: "40px", marginTop: "40px" }}>
-        {/* Dashboard */}
-        <ListItem button>
-          <ListItemIcon>
-            <BsBarChart className="w-5 h-5 text-[#7C8DB5]" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Dashboard"
-            sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
-          />
-        </ListItem>
 
-        {/* Product */}
-        <ListItem button onClick={handleClickProduct}>
-          <ListItemIcon>
-            <PiBriefcase className="w-5 h-5 text-[#7C8DB5]" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Product"
-            sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
+      {/* Sidebar Drawer */}
+      <Drawer
+        variant={isDesktop ? "permanent" : "temporary"}
+        open={isOpen}
+        onClose={toggleSidebar}
+        sx={{
+          width: 287,
+          "& .MuiDrawer-paper": {
+            width: 287,
+            boxSizing: "border-box",
+          },
+        }}
+        anchor="left"
+      >
+        <div>
+          <img
+            src="/src/assets/logo_bits.svg"
+            alt="logo"
+            width={106}
+            height={56.12}
+            className="mt-5 ml-14"
           />
-          {openProduct ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openProduct} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding sx={{ paddingLeft: "20px" }}>
-            <ListItem sx={{ pl: 4 }} button>
-              <ListItemText primary="Manage Cars" />
-            </ListItem>
-            <ListItem sx={{ pl: 4 }} button>
-              <ListItemText primary="Manage Trucks" />
-            </ListItem>
-            <ListItem sx={{ pl: 4 }} button>
-              <ListItemText primary="Manage Spare Parts" />
-            </ListItem>
-          </List>
-        </Collapse>
+        </div>
+        <List sx={{ width: 280, paddingLeft: "40px", marginTop: "40px" }}>
+          {/* Dashboard */}
+          <ListItem button>
+            <ListItemIcon>
+              <BsBarChart className="w-5 h-5 text-[#7C8DB5]" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Dashboard"
+              sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
+            />
+          </ListItem>
 
-        {/* Auction */}
-        <ListItem button onClick={handleClickAuction}>
-          <ListItemIcon>
-            <FaRegUser className="w-5 h-5 text-[#7C8DB5]" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Auction"
-            sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
-          />
-          {openAuction ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openAuction} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem sx={{ pl: 4 }} button>
-              <ListItemText primary="Submenu 1" />
-            </ListItem>
-            <ListItem sx={{ pl: 4 }} button>
-              <ListItemText primary="Submenu 2" />
-            </ListItem>
-          </List>
-        </Collapse>
+          {/* Product */}
+          <ListItem button onClick={handleClickProduct}>
+            <ListItemIcon>
+              <PiBriefcase className="w-5 h-5 text-[#7C8DB5]" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Product"
+              sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
+            />
+            {openProduct ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={openProduct} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding sx={{ paddingLeft: "20px" }}>
+              <ListItem sx={{ pl: 4 }} button>
+                <ListItemText primary="Manage Cars" />
+              </ListItem>
+              <ListItem sx={{ pl: 4 }} button>
+                <ListItemText primary="Manage Trucks" />
+              </ListItem>
+              <ListItem sx={{ pl: 4 }} button>
+                <ListItemText primary="Manage Spare Parts" />
+              </ListItem>
+            </List>
+          </Collapse>
 
-        {/* Reports */}
-        <ListItem button>
-          <ListItemIcon>
-            <RiFileList3Line className="w-5 h-5 text-[#7C8DB5]" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Reports"
-            sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
-          />
-          <Badge
-            badgeContent={2}
-            color="error"
-            sx={{ marginLeft: "auto", marginRight: "10px" }}
-          />
-        </ListItem>
+          {/* Auction */}
+          <ListItem button onClick={handleClickAuction}>
+            <ListItemIcon>
+              <FaRegUser className="w-5 h-5 text-[#7C8DB5]" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Auction"
+              sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
+            />
+            {openAuction ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={openAuction} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem sx={{ pl: 4 }} button>
+                <ListItemText primary="Submenu 1" />
+              </ListItem>
+              <ListItem sx={{ pl: 4 }} button>
+                <ListItemText primary="Submenu 2" />
+              </ListItem>
+            </List>
+          </Collapse>
 
-        {/* Settings */}
-        <ListItem button>
-          <ListItemIcon>
-            <IoSettingsOutline className="w-5 h-5 text-[#7C8DB5]" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Setting"
-            sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
-          />
-        </ListItem>
+          {/* Reports */}
+          <ListItem button>
+            <ListItemIcon>
+              <RiFileList3Line className="w-5 h-5 text-[#7C8DB5]" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Reports"
+              sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
+            />
+          </ListItem>
 
-        {/* Employee Activity */}
-        <ListItem button>
-          <ListItemIcon>
-            <IoSettingsOutline className="w-5 h-5 text-[#7C8DB5]" />
-          </ListItemIcon>
-          <ListItemText
-            primary="Employee Activity"
-            sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
-          />
-        </ListItem>
-      </List>
-    </Drawer>
+          {/* Settings */}
+          <ListItem button>
+            <ListItemIcon>
+              <IoSettingsOutline className="w-5 h-5 text-[#7C8DB5]" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Setting"
+              sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
+            />
+          </ListItem>
+
+          {/* Employee Activity */}
+          <ListItem button>
+            <ListItemIcon>
+              <IoSettingsOutline className="w-5 h-5 text-[#7C8DB5]" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Employee Activity"
+              sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
+            />
+          </ListItem>
+        </List>
+      </Drawer>
+    </>
   );
 };
 
 const Admin = ({ header, children }) => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false); // Set initial state to true for desktop
+
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        backgroundColor: "#f9faff",
-        width: "100vw",
-      }}
-    >
+    <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <SideBar />
+      <SideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       {/* Main Content Wrapper */}
-      <div style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-        {/* Header at the top */}
+      <div className="flex-grow flex flex-col">
+        {/* Header */}
         <Box>{header}</Box>
 
-        {/* Main content area (will take remaining space between header and footer) */}
-        <Box
-          style={{
-            flexGrow: 1,
-            padding: "1rem",
-            overflowY: "auto",
-          }}
-        >
-          {children}
-        </Box>
+        {/* Main content area */}
+        <Box className="flex-grow p-4 overflow-auto">{children}</Box>
 
-        {/* Footer at the bottom */}
-        <Box>
-          <Footer />
-        </Box>
+        {/* Footer */}
+        <Footer />
       </div>
     </div>
   );

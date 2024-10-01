@@ -160,6 +160,7 @@ const CarDetails = () => {
           </div>
         </div>
       </div>
+      <img src="/src/assets/line.svg" alt="" />
 
       {/* Content Section */}
       <div className="flex flex-col lg:flex-row justify-between text-left mt-4 overflow-hidden">

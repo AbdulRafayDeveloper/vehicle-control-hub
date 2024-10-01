@@ -46,6 +46,7 @@ const Item = lazy(() => import("../../views/pages/Inventory/Item.jsx"));
 const Blog = lazy(() => import("../../views/pages/Blog/Blog.jsx"));
 import Details from "../../views/pages/Admin/CarDetails.jsx";
 import UpdateDetails from "../../views/pages/Admin/UpdateDetails.jsx";
+import AddCar from "../../views/pages/Admin/AddCar.jsx";
 export const routes = [
   // All protected routes
   {
@@ -67,6 +68,12 @@ export const routes = [
   {
     path: "/admin/car-details/update-details",
     page: <UpdateDetails />,
+    isProtected: true,
+    aside: null,
+  },
+  {
+    path: "/admin/car-details/add-car",
+    page: <AddCar />,
     isProtected: true,
     aside: null,
   },

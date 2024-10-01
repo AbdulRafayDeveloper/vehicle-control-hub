@@ -62,7 +62,7 @@ const CarDetails = () => {
                   <MenuItem value="Pending">Pending</MenuItem>
                 </Select>
               </div>
-              <RouterLink to={"../"}>
+              <RouterLink to={"/admin/car-details/update-details"}>
                 <Button
                   variant="contained"
                   className="w-[135px] h-[30px]"
@@ -78,26 +78,28 @@ const CarDetails = () => {
                   Edit Car Details
                 </Button>
               </RouterLink>
-              <Button
-                variant="contained"
-                className="w-[180px] h-[30px]"
-                sx={{
-                  textTransform: "capitalize",
-                  fontSize: "12px",
-                  backgroundColor: "#08AD36",
-                  ":hover": {
+              <RouterLink to={"/admin/car-details/add-car"}>
+                <Button
+                  variant="contained"
+                  className="w-[180px] h-[30px]"
+                  sx={{
+                    textTransform: "capitalize",
+                    fontSize: "12px",
                     backgroundColor: "#08AD36",
-                  },
-                }}
-              >
-                + Add Car to Live Auction
-              </Button>
+                    ":hover": {
+                      backgroundColor: "#08AD36",
+                    },
+                  }}
+                >
+                  + Add Car to Live Auction
+                </Button>
+              </RouterLink>
             </div>
           </div>
         </div>
       </div>
 
-      <img src="src/assets/line.svg" alt="" />
+      <img src="/src/assets/line.svg" alt="" />
 
       {/* Content Section */}
       <div className="flex flex-col lg:flex-row justify-between text-left mt-8 overflow-x-auto">
