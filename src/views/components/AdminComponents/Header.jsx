@@ -39,10 +39,11 @@ const AdminHeader = ({ title = "", subText = "" }) => {
   return (
     <AppBar
       position="static"
-      color="transparent"
       elevation={0}
       sx={{
         marginTop: "22px",
+        backgroundColor: "#f3f4f6",
+        color: "black",
       }}
     >
       <Toolbar

@@ -1,24 +1,11 @@
 import React, { useState } from "react";
-import Admin from "../../components/AdminComponents/SideBar";
-import AdminHeader from "../../components/AdminComponents/Header";
-import {
-  Button,
-  MenuItem,
-  Select,
-  Dialog,
-  DialogContent,
-  DialogActions,
-  Typography,
-  DialogContentText,
-  DialogTitle,
-  IconButton,
-  Checkbox,
-  FormControlLabel,
-} from "@mui/material";
+import SuccessDialog from "../../../components/AdminComponents/SuccessDialog"; // Import SuccessDialog
+import DeleteDialog from "../../../components/AdminComponents/DeleteDialog"; // Import DeleteDialog
+import { Button, Select, MenuItem } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
+import Admin from "../../../components/AdminComponents/SideBar";
+import AdminHeader from "../../../components/AdminComponents/Header";
 const header = (
   <AdminHeader title="Car details" subText="Below are the car details" />
 );
@@ -39,11 +26,40 @@ const CarDetails = () => {
     price: "AED 30,000",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   });
-
-  const [uploadedImages, setUploadedImages] = useState([]);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [imageToDelete, setImageToDelete] = useState(null); // Track the image index to delete
+  const [imageToDelete, setImageToDelete] = useState(null);
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [doneMessage, setDoneMessage] = useState("");
+  const [title, setTitle] = useState("");
+  const [deleteMessage, setDeleteMessage] = useState(
+    "Are you sure you want to delete this item?"
+  );
 
+  const handleDialogOpen = () => {
+    setTitle("Changes saved");
+    setDoneMessage("Changes have been saved successfully!");
+    setOpenSuccessDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenSuccessDialog(false);
+  };
+
+  const handleDeleteOpen = (index) => {
+    setImageToDelete(index);
+    setOpenDeleteDialog(true);
+  };
+
+  const handleDeleteClose = () => {
+    setOpenDeleteDialog(false);
+    setImageToDelete(null);
+  };
+
+  // Images Upload
   const handleImageUpload = (event) => {
     const files = event.target.files;
     if (files.length + uploadedImages.length <= 12) {
@@ -55,30 +71,12 @@ const CarDetails = () => {
       alert("You can only upload a maximum of 12 images.");
     }
   };
-  const [openDialog, setOpenDialog] = useState(false);
-  const [open, setOpen] = useState(false);
-  const handleDialogOpen = () => setOpenDialog(true);
-  const handleDialogClose = () => setOpenDialog(false);
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleDeleteOpen = (index) => {
-    setImageToDelete(index); // Set the index of the image to be deleted
-    setOpenDeleteDialog(true); // Open the confirmation dialog
-  };
-
-  const handleDeleteClose = () => {
-    setOpenDeleteDialog(false); // Close the dialog
-    setImageToDelete(null); // Reset the image to delete
-  };
 
   const handleDeleteConfirm = () => {
-    const updatedImages = uploadedImages.filter(
-      (image, index) => index !== imageToDelete
-    );
-    setUploadedImages(updatedImages);
-    handleDeleteClose();
+    // Delete logic here
+    setOpenDeleteDialog(false);
+    setDoneMessage("Deleted successfully!");
+    setOpenSuccessDialog(true); // Show success dialog after deletion
   };
 
   return (
@@ -313,15 +311,15 @@ const CarDetails = () => {
             <p className=" text-gray-500 text-[10px] text-center leading-4 my-2">
               Image thumbnail{" "}
               <span className="font-semibold text-black ">
-                (Dimension: 507×461px, <br /> Format: jpg, jpeg, webp, Max size:
-                900 KB) <span className="text-red-500">*</span>
+                (Dimension: 507×461px, <br /> Format: jpg, jpeg, png, svg, Max
+                size: 900 KB) <span className="text-red-500">*</span>
               </span>
             </p>
             <label
               htmlFor="upload"
               className="block cursor-pointer mt-4 text-center"
             >
-              <span className="p-1.5 rounded-md  bg-gray-300 text-[10px]">
+              <span className="p-1.5 rounded-md bg-gray-300 text-[10px]">
                 + Add media (image)
               </span>
             </label>
@@ -330,7 +328,7 @@ const CarDetails = () => {
               id="upload"
               className="hidden"
               multiple
-              accept="image/jpeg, image/jpg, image/webp, image/svg"
+              accept=".jpeg, .jpg, .png, .svg"
               onChange={handleImageUpload}
             />
             <p className="text-center mt-10 text-[10px]">
@@ -375,102 +373,21 @@ const CarDetails = () => {
           )}
         </div>
 
-        {/* Update Dialog Box */}
-        <Dialog open={openDialog} onClose={handleDialogClose}>
-          <DialogContent>
-            <div className="flex flex-col items-center">
-              <img
-                src="/src/assets/done-icon.svg"
-                alt="Success"
-                className="w-20 h-20 mb-4"
-              />
-              <Typography
-                variant="h6"
-                component="div"
-                className="mb-2 text-xl font-semibold"
-              >
-                Changes saved
-              </Typography>
-              <Typography variant="subtitle2">
-                Changes have been saved successfully
-              </Typography>
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={handleDialogClose}
-              variant="contained"
-              sx={{
-                width: 100,
-                height: 30,
-                marginX: 15,
-                marginTop: "-10px",
-                marginBottom: "20px",
-                backgroundColor: "#08AD36",
-                "&:hover": { backgroundColor: "#08AD36" },
-              }}
-            >
-              Ok
-            </Button>
-          </DialogActions>
-        </Dialog>
-        {/* Delete Confirmation Dialog */}
-        <Dialog open={openDeleteDialog} onClose={handleDeleteClose}>
-          <DialogContent>
-            <div className="flex flex-col items-center">
-              <img
-                src="/src/assets/delete-icon.svg"
-                alt="Success"
-                className="w-20 h-20 mb-4"
-              />
-              <Typography
-                variant="h6"
-                component="div"
-                className="mb-2 text-xl font-semibold"
-              >
-                Are you sure?
-              </Typography>
-              <Typography variant="subtitle2">
-                You won't be able to revert this!
-              </Typography>
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <div>
-              <Button
-                onClick={handleDeleteClose}
-                variant="outlined"
-                sx={{
-                  width: 100,
-                  height: 30,
-                  marginLeft: 10,
-                  marginTop: "-10px",
-                  marginBottom: "20px",
-                  textTransform: "capitalize",
-                }}
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleDeleteConfirm}
-                variant="contained"
-                sx={{
-                  width: 100,
-                  height: 30,
-                  marginRight: 10,
-                  marginLeft: 3,
-                  marginTop: "-10px",
-                  marginBottom: "20px",
-                  backgroundColor: "#E03137",
-                  textTransform: "capitalize",
-                  "&:hover": { backgroundColor: "#E03137" },
-                }}
-              >
-                Delete
-              </Button>
-            </div>
-          </DialogActions>
-        </Dialog>
+        {/* Done Dialog */}
+        <SuccessDialog
+          open={openSuccessDialog}
+          onClose={handleDialogClose}
+          title={title}
+          message={doneMessage}
+        />
+
+        {/* Delete Dialog */}
+        <DeleteDialog
+          open={openDeleteDialog}
+          onClose={handleDeleteClose}
+          onDeleteConfirm={handleDeleteConfirm}
+          message={deleteMessage}
+        />
       </div>
     </div>
   );

@@ -12,16 +12,21 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { BsBarChart } from "react-icons/bs";
 import { PiBriefcase } from "react-icons/pi";
 import { FaRegUser } from "react-icons/fa6";
 import { RiFileList3Line } from "react-icons/ri";
 import { IoSettingsOutline } from "react-icons/io5";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Footer from "../AdminComponents/Footer";
 
 const SideBar = ({ isOpen, toggleSidebar }) => {
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const [openProduct, setOpenProduct] = useState(false);
   const [openAuction, setOpenAuction] = useState(false);
   const [openUserManagement, setOpenUserManagement] = useState(false);
@@ -30,8 +35,6 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
   const handleClickAuction = () => setOpenAuction(!openAuction);
   const handleClickUserManagement = () =>
     setOpenUserManagement(!openUserManagement);
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <>
@@ -48,14 +51,20 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
         open={isOpen}
         onClose={toggleSidebar}
         sx={{
-          width: 287,
+          width: 260,
           "& .MuiDrawer-paper": {
-            width: 287,
+            width: 260,
             boxSizing: "border-box",
+            overflow: "auto",
+            scrollbarWidth: "none", // For Firefox
+            "&::-webkit-scrollbar": {
+              display: "none", // For Chrome, Safari, and WebKit browsers
+            },
           },
         }}
         anchor="left"
       >
+        {/* Sidebar Content */}
         <div>
           <img
             src="/src/assets/logo_bits.svg"
@@ -65,7 +74,14 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
             className="mt-5 ml-14"
           />
         </div>
-        <List sx={{ width: 280, paddingLeft: "40px", marginTop: "40px" }}>
+        <List
+          sx={{
+            width: 255,
+            paddingLeft: "40px",
+            marginTop: "40px",
+            color: "#7C8DB5",
+          }}
+        >
           {/* Dashboard */}
           <ListItem button>
             <ListItemIcon>
@@ -157,14 +173,47 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
             />
           </ListItem>
         </List>
+        <List sx={{ width: 255, paddingLeft: "40px", marginTop: "40px" }}>
+          {/* Help center */}
+          <ListItem button>
+            <ListItemIcon>
+              <InfoOutlinedIcon className="w-5 h-5 text-[#7C8DB5]" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Help Center"
+              sx={{ color: "#7C8DB5", marginLeft: "-20px", fontSize: "16px" }}
+            />
+          </ListItem>
+          {/* Feedback */}
+          <ListItem button>
+            <ListItemIcon>
+              <IoChatbubbleEllipsesOutline className="w-5 h-5 text-[#7C8DB5]" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Feedback"
+              sx={{ color: "#7C8DB5", marginLeft: "-20px" }}
+            />
+          </ListItem>
+          {/* Logout */}
+          <ListItem button>
+            <ListItemIcon>
+              <IoLogOutOutline className="w-5 h-5 text-red-500" />
+            </ListItemIcon>
+            <ListItemText
+              primary="Log out"
+              sx={{ color: "red", marginLeft: "-20px", fontSize: "16px" }}
+            />
+          </ListItem>
+        </List>
       </Drawer>
     </>
   );
 };
 
 const Admin = ({ header, children }) => {
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Set initial state to true for desktop
-
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
   return (
@@ -178,7 +227,18 @@ const Admin = ({ header, children }) => {
         <Box>{header}</Box>
 
         {/* Main content area */}
-        <Box className="flex-grow p-4 overflow-auto">{children}</Box>
+        <Box
+          className="flex-grow p-4"
+          sx={{
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+            overflow: isDesktop ? "auto" : "",
+          }}
+        >
+          {children}
+        </Box>
 
         {/* Footer */}
         <Footer />

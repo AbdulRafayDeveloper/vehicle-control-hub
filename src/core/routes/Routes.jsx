@@ -44,9 +44,14 @@ const Inventory = lazy(() =>
 );
 const Item = lazy(() => import("../../views/pages/Inventory/Item.jsx"));
 const Blog = lazy(() => import("../../views/pages/Blog/Blog.jsx"));
-import Details from "../../views/pages/Admin/CarDetails.jsx";
-import UpdateDetails from "../../views/pages/Admin/UpdateDetails.jsx";
-import AddCar from "../../views/pages/Admin/AddCar.jsx";
+// For Cars
+import Details from "../../views/pages/Admin/ManageCars/CarDetails.jsx";
+import UpdateDetails from "../../views/pages/Admin/ManageCars/UpdateDetails.jsx";
+import AddCar from "../../views/pages/Admin/ManageCars/AddCar.jsx";
+// For Parts
+import Part_Details from "../../views/pages/Admin/SpareParts/PartsDetails.jsx";
+import UpdatePartDetails from "../../views/pages/Admin/SpareParts/UpdatePartsDetails.jsx";
+import AddPart from "../../views/pages/Admin/SpareParts/AddParts.jsx";
 export const routes = [
   // All protected routes
   {
@@ -74,6 +79,24 @@ export const routes = [
   {
     path: "/admin/car-details/add-car",
     page: <AddCar />,
+    isProtected: true,
+    aside: null,
+  },
+  {
+    path: "/admin/part-details",
+    page: <Part_Details />,
+    isProtected: true,
+    aside: null,
+  },
+  {
+    path: "/admin/part-details/update-parts",
+    page: <UpdatePartDetails />,
+    isProtected: true,
+    aside: null,
+  },
+  {
+    path: "/admin/part-details/add-part",
+    page: <AddPart />,
     isProtected: true,
     aside: null,
   },

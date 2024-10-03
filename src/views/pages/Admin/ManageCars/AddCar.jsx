@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Admin from "../../components/AdminComponents/SideBar";
-import AdminHeader from "../../components/AdminComponents/Header";
+import Admin from "../../../components/AdminComponents/SideBar";
+import AdminHeader from "../../../components/AdminComponents/Header";
 import {
   Button,
   MenuItem,
@@ -31,8 +31,7 @@ import { PiEngineBold } from "react-icons/pi";
 import { GiCarDoor } from "react-icons/gi";
 import { BiSolidColorFill } from "react-icons/bi";
 import { BsFileEarmarkText } from "react-icons/bs";
-import { width } from "@mui/system";
-import { Luggage } from "@mui/icons-material";
+import SuccessDialog from "../../../components/AdminComponents/SuccessDialog";
 
 const header = (
   <AdminHeader title="Car details" subText="Below are the car details" />
@@ -52,7 +51,9 @@ const CarDetails = () => {
     roofLoad: "400kg",
     luggage: "850",
   });
-
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+  const [title, setTitle] = useState("");
+  const [doneMessage, setDoneMessage] = useState("");
   const [uploadedImages, setUploadedImages] = useState([]);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [imageToDelete, setImageToDelete] = useState(null); // Track the image index to delete
@@ -69,7 +70,6 @@ const CarDetails = () => {
     }
   };
   const [openDialog, setOpenDialog] = useState(false);
-  const handleDialogClose = () => setOpenDialog(false);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -95,6 +95,17 @@ const CarDetails = () => {
     if (count > 1) {
       setCount((prevCount) => prevCount - 1);
     }
+  };
+
+  // Dialog:
+  const handleDialogOpen = () => {
+    setTitle("Dear Customer");
+    setDoneMessage("You have successfully added a new car in inventory.");
+    setOpenSuccessDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenSuccessDialog(false);
   };
   return (
     <div className="container mx-auto p-8 bg-white rounded-xl">
@@ -134,24 +145,23 @@ const CarDetails = () => {
                   <MenuItem value="Pending">Out of stock</MenuItem>
                 </Select>
               </div>
-              <RouterLink to={"/admin/car-details/update-details"}>
-                <Button
-                  variant="contained"
-                  className="w-[100px] h-[30px]"
-                  sx={{
-                    textTransform: "capitalize",
-                    fontSize: "12px",
-                    backgroundColor: "#525354",
-                    ":hover": {
-                      backgroundColor: "#05387A",
-                    },
-                  }}
-                >
-                  Cancel
-                </Button>
-              </RouterLink>
               <Button
                 variant="contained"
+                className="w-[100px] h-[30px]"
+                sx={{
+                  textTransform: "capitalize",
+                  fontSize: "12px",
+                  backgroundColor: "#525354",
+                  ":hover": {
+                    backgroundColor: "#05387A",
+                  },
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleDialogOpen}
                 className="w-[105px] h-[30px]"
                 sx={{
                   textTransform: "capitalize",
@@ -763,6 +773,13 @@ const CarDetails = () => {
             </div>
           </form>
         </div>
+
+        <SuccessDialog
+          open={openSuccessDialog}
+          onClose={handleDialogClose}
+          title={title}
+          message={doneMessage}
+        />
       </div>
     </div>
   );

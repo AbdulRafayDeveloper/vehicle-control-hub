@@ -1,22 +1,23 @@
 // App.js
 import React, { useState } from "react";
-import Admin from "../../components/AdminComponents/SideBar";
-import AdminHeader from "../../components/AdminComponents/Header";
+import Admin from "../../../components/AdminComponents/SideBar";
+import AdminHeader from "../../../components/AdminComponents/Header";
 import { Button, MenuItem, Select } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const header = (
-  <AdminHeader title="Car details" subText="Below are the car details" />
+  <AdminHeader title="Part details" subText="Below are the parts details" />
 );
 
-const CarDetails = () => {
+const PartDetails = () => {
   // State to hold the selected image
   const [selectedImage, setSelectedImage] = useState(
-    "/src/assets/Cars/image.svg"
+    "/src/assets/Parts/main.svg"
   );
 
   const handleImageClick = (index) => {
-    setSelectedImage(`/src/assets/Cars/${index + 1}.svg`);
+    setSelectedImage(`/src/assets/Parts/${index + 1}.svg`);
   };
   return (
     <div className="container mx-auto p-8 bg-white rounded-xl">
@@ -25,7 +26,7 @@ const CarDetails = () => {
         {/* Left Panel */}
         <div>
           <h1 className="text-xl font-semibold text-left ">
-            Toyota corolla altus
+            Toyota corolla altus back lights
           </h1>
           {/* Barcode side */}
           <div className="flex gap-3 mt-1">
@@ -62,7 +63,7 @@ const CarDetails = () => {
                   <MenuItem value="Pending">Pending</MenuItem>
                 </Select>
               </div>
-              <RouterLink to={"/admin/car-details/update-details"}>
+              <RouterLink to={"/admin/part-details/update-parts"}>
                 <Button
                   variant="contained"
                   className="w-[135px] h-[30px]"
@@ -78,7 +79,7 @@ const CarDetails = () => {
                   Edit Car Details
                 </Button>
               </RouterLink>
-              <RouterLink to={"/admin/car-details/add-car"}>
+              <RouterLink to={"/admin/part-details/add-part"}>
                 <Button
                   variant="contained"
                   className="w-[180px] h-[30px]"
@@ -110,16 +111,13 @@ const CarDetails = () => {
           </h2>
           <div className="space-y-4">
             <div className="flex">
-              <p className="car-details">Car ID</p>
+              <p className="car-details">Part ID/S No</p>
               <p className="text-sm">123234242</p>
             </div>
+
             <div className="flex">
-              <p className="car-details">Chassis number</p>
-              <p className="text-sm">767567464</p>
-            </div>
-            <div className="flex">
-              <p className="car-details">Car name</p>
-              <p className="text-sm">Toyota Corolla Altus</p>
+              <p className="car-details">Part name</p>
+              <p className="text-sm">Toyota corolla altus back lights</p>
             </div>
             <div className="flex">
               <p className="car-details">Make</p>
@@ -127,35 +125,23 @@ const CarDetails = () => {
             </div>
             <div className="flex">
               <p className="car-details">Model</p>
-              <p>Corolla</p>
+              <p>2024</p>
             </div>
             <div className="flex">
               <p className="car-details">Year</p>
               <p className="text-sm">2024</p>
             </div>
             <div className="flex">
-              <p className="car-details">Color</p>
-              <p className="text-sm">White</p>
-            </div>
-            <div className="flex">
-              <p className="car-details">Mileage</p>
-              <p className="text-sm">2,000 Km</p>
-            </div>
-            <div className="flex">
-              <p className="car-details">Fuel Type</p>
-              <p className="text-sm">Petrol</p>
-            </div>
-            <div className="flex">
-              <p className="car-details">Transmission</p>
-              <p className="text-sm">Automatic</p>
+              <p className="car-details">Category</p>
+              <p className="text-sm">Body Parts</p>
             </div>
             <div className="flex">
               <p className="car-details">Condition</p>
-              <p className="text-sm">Used</p>
+              <p className="text-sm">New</p>
             </div>
             <div className="flex">
               <p className="car-details">Price</p>
-              <p className="text-sm">AED 30,000</p>
+              <p className="text-sm">AED 200</p>
             </div>
             <div className="flex">
               <p className="car-details">Description</p>
@@ -169,20 +155,22 @@ const CarDetails = () => {
         {/* Image Section */}
         <div className="flex flex-col items-center lg:ml-8 mt-8 lg:mt-0 min-w-[300px]">
           {/* Display the selected image */}
-          <img
-            src={selectedImage}
-            alt="Car"
-            className="rounded-lg w-full max-w-sm object-cover mb-4"
-          />
+          <div className="bg-[#F6F6FF] p-6 rounded-lg mb-4 w-full h-full flex justify-center items-center">
+            <img
+              src={selectedImage}
+              alt="Car"
+              className=" w-[240px] h-[140px] "
+            />
+          </div>
 
           {/* Thumbnail grid */}
-          <div className="grid grid-cols-5 gap-2">
-            {Array(10)
+          <div className="grid grid-cols-5 gap-2 ">
+            {Array(4)
               .fill()
               .map((_, i) => (
                 <img
                   key={i}
-                  src={`/src/assets/Cars/${i + 1}.svg`}
+                  src={`/src/assets/Parts/${i + 1}.svg`}
                   alt={`Car thumbnail ${i + 1}`}
                   className="w-16 h-16 rounded-lg object-cover cursor-pointer"
                   onClick={() => handleImageClick(i)} // Handle click to change the selected image
@@ -195,12 +183,12 @@ const CarDetails = () => {
   );
 };
 
-function Details() {
+function Part_Details() {
   return (
     <div>
-      <Admin header={header} children={<CarDetails />} />
+      <Admin header={header} children={<PartDetails />} />
     </div>
   );
 }
 
-export default Details;
+export default Part_Details;
